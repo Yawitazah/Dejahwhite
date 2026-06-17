@@ -110,7 +110,7 @@
     <span class="tg">Faith First &middot; Family Close</span>
   </div>
 
-  <img class="herophoto" src="./images/cover.jpg" alt="Tropical beach resort with pool and ocean view">
+  <img class="herophoto" src="https://static.wixstatic.com/media/037c75_9aba4b5e5c7449c3a6f4c7e7fb03f95d~mv2.jpg" alt="Tropical beach resort with pool and ocean view">
 
   <div class="hero">
     <div class="wrap">
@@ -119,7 +119,7 @@
       <div class="sub">A turnkey way for everyday families to build an extra income stream inside an industry you already use &mdash; no product to create, no inventory, no brand to build from scratch.</div>
 
       <div class="card">
-        <img class="thumb" src="./images/guide-cover.jpg" alt="The Smart Traveler's Guide cover">
+        <img class="thumb" src="https://static.wixstatic.com/media/037c75_e8cbe4788cfc47b89624ab3716c673c1~mv2.png" alt="The Smart Traveler's Guide cover">
         <div class="cardbody">
           <div class="clabel">Start with the free guide</div>
           <div class="ctitle">The Smart Traveler&rsquo;s Guide to Turning Trips Into Income</div>
@@ -177,7 +177,7 @@
       <div class="kick">Why me</div>
       <h2>I didn&rsquo;t stumble into this. I was raised in it.</h2>
       <div class="trust">
-        <img class="tphoto" src="./images/family.jpg" alt="Dejah White and her family">
+        <img class="tphoto" src="https://static.wixstatic.com/media/037c75_e8cbe4788cfc47b89624ab3716c673c1~mv2.png" alt="Dejah White and her family">
         <div class="tbody">
           <p class="lede">I come from a family of entrepreneurs. My father is a founding member of this company who has built a six-figure annual income in this industry &mdash; and he has mentored me for as long as I can remember. When my husband and I built our own, we weren&rsquo;t guessing; we were following a blueprint we&rsquo;d watched succeed for years. It&rsquo;s already generating residual income for our family, too.</p>
           <div class="disc">My father&rsquo;s success is his own individual result, shared to show what&rsquo;s possible with the right positioning and years of work &mdash; not a promise of your earnings.</div>
@@ -222,45 +222,68 @@
   </div>
 
   <script>
-    const form = document.getElementById('lead-form');
-    const submitBtn = document.getElementById('submit-btn');
-    const formSuccess = document.getElementById('form-success');
-    const formError = document.getElementById('form-error');
-    const firstNameInput = document.getElementById('firstName');
-    const emailInput = document.getElementById('email');
+    var WIX_CLIENT_ID = '897cba15-c5fb-4204-a89b-81bbca8b6f4e';
+    var WIX_SITE_ID   = 'ee0295b0-5a24-47cd-8610-58c1b5e46882';
+
+    var form           = document.getElementById('lead-form');
+    var submitBtn      = document.getElementById('submit-btn');
+    var formSuccess    = document.getElementById('form-success');
+    var formError      = document.getElementById('form-error');
+    var firstNameInput = document.getElementById('firstName');
+    var emailInput     = document.getElementById('email');
 
     function validateEmail(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const firstName = firstNameInput.value.trim();
-      const email = emailInput.value.trim();
+      var firstName = firstNameInput.value.trim();
+      var email = emailInput.value.trim();
       formError.style.display = 'none';
       firstNameInput.classList.remove('error');
       emailInput.classList.remove('error');
-      let valid = true;
+      var valid = true;
       if (!firstName) { firstNameInput.classList.add('error'); valid = false; }
       if (!email || !validateEmail(email)) { emailInput.classList.add('error'); valid = false; }
       if (!valid) { formError.style.display = 'block'; return; }
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
-      try {
-        const res = await fetch('/.netlify/functions/subscribe', {
+
+      fetch('https://www.wixapis.com/oauth2/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clientId: WIX_CLIENT_ID, grantType: 'anonymous' })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(tokenData) {
+        if (!tokenData.access_token) throw new Error('Auth failed');
+        return fetch('https://www.wixapis.com/contacts/v4/contacts', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ firstName, email })
+          headers: {
+            'Authorization': 'Bearer ' + tokenData.access_token,
+            'wix-site-id': WIX_SITE_ID,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            info: {
+              name: { first: firstName },
+              emails: { items: [{ tag: 'MAIN', email: email }] }
+            }
+          })
         });
-        if (!res.ok) throw new Error('Server error');
+      })
+      .then(function(res) {
+        if (!res.ok && res.status !== 409) throw new Error('Server error ' + res.status);
         form.style.display = 'none';
         formSuccess.style.display = 'block';
-      } catch (err) {
+      })
+      .catch(function() {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send Me the Guide →';
         formError.textContent = 'Something went wrong. Please try again.';
         formError.style.display = 'block';
-      }
+      });
     });
   </script>
 

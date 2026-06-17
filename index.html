@@ -321,26 +321,28 @@ img { display: block; max-width: 100%; }
     <div class="writing-grid">
       <div>
         <div class="featured-img">
-          <img src="https://static.wixstatic.com/media/037c75_12b24b26580d418da9b8b984f6a1c362~mv2.png" alt="Featured article">
+          <img id="blog-feat-img" src="https://static.wixstatic.com/media/037c75_12b24b26580d418da9b8b984f6a1c362~mv2.png" alt="Featured article">
         </div>
         <div class="post-meta">
-          <span class="post-cat">Faith</span>
+          <span class="post-cat" id="blog-feat-cat">Faith</span>
           <span class="post-dot"></span>
-          <span class="post-date">June 2026</span>
+          <span class="post-date" id="blog-feat-date">June 2026</span>
         </div>
-        <h3 class="featured-title">The Quiet Discipline of Becoming</h3>
-        <p class="featured-excerpt">On the unglamorous, daily work of growth &mdash; and why the smallest faithful habits shape the deepest change.</p>
+        <a id="blog-feat-link" href="#" style="display:block;text-decoration:none;color:inherit;">
+          <h3 class="featured-title" id="blog-feat-title">The Quiet Discipline of Becoming</h3>
+        </a>
+        <p class="featured-excerpt" id="blog-feat-excerpt">On the unglamorous, daily work of growth &mdash; and why the smallest faithful habits shape the deepest change.</p>
       </div>
       <div class="post-list">
-        <a href="#" class="post-item">
+        <a href="#" class="post-item" data-blog-item="0">
           <div class="post-meta"><span class="post-cat">Home &amp; Living</span><span class="post-dot"></span><span class="post-date">May 2026</span></div>
           <h4>On Building a Home That Breathes</h4>
         </a>
-        <a href="#" class="post-item">
+        <a href="#" class="post-item" data-blog-item="1">
           <div class="post-meta"><span class="post-cat">Marriage</span><span class="post-dot"></span><span class="post-date">May 2026</span></div>
           <h4>Marriage as a Daily Liturgy</h4>
         </a>
-        <a href="#" class="post-item">
+        <a href="#" class="post-item" data-blog-item="2">
           <div class="post-meta"><span class="post-cat">Natural Living</span><span class="post-dot"></span><span class="post-date">April 2026</span></div>
           <h4>What Natural Living Taught Me About Trust</h4>
         </a>
@@ -408,49 +410,142 @@ img { display: block; max-width: 100%; }
 </footer>
 
 <script>
+  // --- Mobile nav ---
   document.getElementById('hamburger').addEventListener('click', function() {
     document.getElementById('mobile-menu').classList.toggle('open');
   });
 
-  const nlForm = document.getElementById('nl-form');
-  const nlSubmit = document.getElementById('nl-submit');
-  const nlSuccess = document.getElementById('nl-success');
-  const nlName = document.getElementById('nl-name');
-  const nlEmail = document.getElementById('nl-email');
+  // --- Wix Headless ---
+  var WIX_CLIENT_ID = '897cba15-c5fb-4204-a89b-81bbca8b6f4e';
+  var WIX_SITE_ID   = 'ee0295b0-5a24-47cd-8610-58c1b5e46882';
+
+  var _wixToken = null, _wixTokenExp = 0;
+
+  function getVisitorToken() {
+    if (_wixToken && Date.now() < _wixTokenExp) return Promise.resolve(_wixToken);
+    return fetch('https://www.wixapis.com/oauth2/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ clientId: WIX_CLIENT_ID, grantType: 'anonymous' })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d.access_token) throw new Error('Token error');
+      _wixToken = d.access_token;
+      _wixTokenExp = Date.now() + ((d.expires_in || 3600) - 120) * 1000;
+      return _wixToken;
+    });
+  }
+
+  function wixRequest(url, options) {
+    options = options || {};
+    return getVisitorToken().then(function(token) {
+      var headers = Object.assign({
+        'Authorization': 'Bearer ' + token,
+        'wix-site-id': WIX_SITE_ID
+      }, options.headers || {});
+      return fetch(url, Object.assign({}, options, { headers: headers }));
+    }).then(function(res) {
+      return res.json().then(function(data) {
+        if (!res.ok && res.status !== 409) throw new Error(data.message || String(res.status));
+        return data;
+      });
+    });
+  }
+
+  // --- Newsletter form ---
+  var nlForm   = document.getElementById('nl-form');
+  var nlSubmit = document.getElementById('nl-submit');
+  var nlSuccess = document.getElementById('nl-success');
+  var nlName   = document.getElementById('nl-name');
+  var nlEmail  = document.getElementById('nl-email');
 
   function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 
-  nlForm.addEventListener('submit', async function(e) {
+  nlForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    const firstName = nlName.value.trim();
-    const email = nlEmail.value.trim();
+    var firstName = nlName.value.trim();
+    var email = nlEmail.value.trim();
     nlName.classList.remove('error');
     nlEmail.classList.remove('error');
-    let valid = true;
+    var valid = true;
     if (!firstName) { nlName.classList.add('error'); valid = false; }
     if (!email || !isValidEmail(email)) { nlEmail.classList.add('error'); valid = false; }
     if (!valid) return;
     nlSubmit.disabled = true;
     nlSubmit.textContent = 'Joining…';
-    try {
-      const FORM_ENDPOINT = '';
-      if (FORM_ENDPOINT) {
-        const res = await fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ firstName, email })
-        });
-        if (!res.ok) throw new Error('error');
-      }
+    wixRequest('https://www.wixapis.com/contacts/v4/contacts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        info: {
+          name: { first: firstName },
+          emails: { items: [{ tag: 'MAIN', email: email }] }
+        }
+      })
+    }).then(function() {
       nlForm.style.display = 'none';
       nlSuccess.style.display = 'block';
-    } catch {
+    }).catch(function() {
       nlSubmit.disabled = false;
       nlSubmit.textContent = 'Join the Journey';
       nlName.classList.add('error');
       nlEmail.classList.add('error');
-    }
+    });
   });
+
+  // --- Live blog posts from Wix ---
+  function fmtDate(iso) {
+    if (!iso) return '';
+    return new Date(iso).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  }
+
+  function loadBlogPosts() {
+    wixRequest('https://www.wixapis.com/blog/v3/posts?paging.limit=4')
+    .then(function(data) {
+      var posts = (data.posts || []).slice(0, 4);
+      if (!posts.length) return;
+
+      var featured = posts[0];
+      var sidebar  = posts.slice(1, 4);
+
+      var imgEl     = document.getElementById('blog-feat-img');
+      var linkEl    = document.getElementById('blog-feat-link');
+      var catEl     = document.getElementById('blog-feat-cat');
+      var dateEl    = document.getElementById('blog-feat-date');
+      var titleEl   = document.getElementById('blog-feat-title');
+      var excerptEl = document.getElementById('blog-feat-excerpt');
+
+      if (imgEl && featured.media && featured.media.wixMedia && featured.media.wixMedia.image) {
+        imgEl.src = featured.media.wixMedia.image.url + '/v1/fill/w_800,h_533,al_c,q_80/file.jpg';
+        imgEl.alt = featured.title;
+      }
+      if (linkEl && featured.slug) linkEl.href = '/blog/' + featured.slug;
+      if (catEl) catEl.textContent = 'Blog';
+      if (dateEl) dateEl.textContent = fmtDate(featured.firstPublishedDate);
+      if (titleEl) titleEl.textContent = featured.title;
+      if (excerptEl) excerptEl.textContent = featured.excerpt || '';
+
+      var sideItems = document.querySelectorAll('[data-blog-item]');
+      for (var i = 0; i < sideItems.length; i++) {
+        var idx  = parseInt(sideItems[i].getAttribute('data-blog-item'), 10);
+        var post = sidebar[idx];
+        if (!post) continue;
+        var c = sideItems[i].querySelector('.post-cat');
+        var d = sideItems[i].querySelector('.post-date');
+        var t = sideItems[i].querySelector('h4');
+        if (c) c.textContent = 'Blog';
+        if (d) d.textContent = fmtDate(post.firstPublishedDate);
+        if (t) t.textContent = post.title;
+        if (post.slug) sideItems[i].href = '/blog/' + post.slug;
+      }
+    })
+    .catch(function() {
+      // Keep placeholder content on error
+    });
+  }
+
+  loadBlogPosts();
 </script>
 
 </body>
