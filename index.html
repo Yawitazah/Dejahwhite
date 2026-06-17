@@ -511,8 +511,7 @@ img { display: block; max-width: 100%; }
     options = options || {};
     return getVisitorToken().then(function(token) {
       var headers = Object.assign({
-        'Authorization': 'Bearer ' + token,
-        'wix-site-id': WIX_SITE_ID
+        'Authorization': 'Bearer ' + token
       }, options.headers || {});
       return fetch(url, Object.assign({}, options, { headers: headers }));
     }).then(function(res) {
@@ -566,6 +565,27 @@ img { display: block; max-width: 100%; }
     return new Date(iso).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   }
 
+  var CATEGORY_MAP = {};
+  function catOf(post) {
+    if (post.categoryIds && post.categoryIds.length && CATEGORY_MAP[post.categoryIds[0]]) {
+      return CATEGORY_MAP[post.categoryIds[0]];
+    }
+    if (post.hashtags && post.hashtags.length) return post.hashtags[0];
+    return 'Journal';
+  }
+
+  function loadCategories() {
+    return wixRequest('https://www.wixapis.com/blog/v3/categories/query', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ paging: { limit: 50 } })
+    })
+    .then(function(data) {
+      (data.categories || []).forEach(function(c) { CATEGORY_MAP[c.id] = c.label || c.title || ''; });
+    })
+    .catch(function() {});
+  }
+
   function loadBlogPosts() {
     wixRequest('https://www.wixapis.com/blog/v3/posts/query', {
       method: 'POST',
@@ -590,7 +610,7 @@ img { display: block; max-width: 100%; }
         imgEl.alt = featured.title;
       }
       if (linkEl && featured.slug) linkEl.href = 'blog-post.html?slug=' + featured.slug;
-      if (catEl) catEl.textContent = 'Blog';
+      if (catEl) catEl.textContent = catOf(featured);
       if (dateEl) dateEl.textContent = fmtDate(featured.firstPublishedDate);
       if (titleEl) titleEl.textContent = featured.title;
       if (excerptEl) excerptEl.textContent = featured.excerpt || '';
@@ -603,7 +623,7 @@ img { display: block; max-width: 100%; }
         var c = sideItems[i].querySelector('.post-cat');
         var d = sideItems[i].querySelector('.post-date');
         var t = sideItems[i].querySelector('h4');
-        if (c) c.textContent = 'Blog';
+        if (c) c.textContent = catOf(post);
         if (d) d.textContent = fmtDate(post.firstPublishedDate);
         if (t) t.textContent = post.title;
         if (post.slug) sideItems[i].href = 'blog-post.html?slug=' + post.slug;
@@ -612,7 +632,7 @@ img { display: block; max-width: 100%; }
     .catch(function() {});
   }
 
-  loadBlogPosts();
+  loadCategories().then(loadBlogPosts);
 </script>
 
 </body>
