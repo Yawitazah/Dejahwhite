@@ -24,7 +24,7 @@
       --sans:   'Lato', -apple-system, sans-serif;
     }
 
-    /* ─── RESET ───────────────────────── */
+    /* ─── RESET ─────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -508,7 +508,7 @@
       margin-top: 10px;
     }
 
-    /* ─── FOOTER ────────────────────── */
+    /* ─── FOOTER ───────────────────── */
     .site-footer {
       background: var(--footer);
       color: var(--faint);
@@ -618,7 +618,7 @@
     .sk-l-95 { width: 95%; }
     .sk-l-60 { width: 60%; }
 
-    /* ─── ERROR STATE ──────────────── */
+    /* ─── ERROR STATE ───────────────── */
     .error-state {
       display: none;
       min-height: 60vh;
@@ -671,7 +671,7 @@
     /* ─── MAIN POST AREAS (hidden until loaded) ──── */
     .post-area { display: none; }
 
-    /* ─── RESPONSIVE ───────────────── */
+    /* ─── RESPONSIVE ────────────────── */
     @media (max-width: 900px) {
       .nav { padding: 0 24px; }
       .nav-links { display: none; }
@@ -696,7 +696,7 @@
 </head>
 <body>
 
-<!-- ─── NAV ────────────────────────── -->
+<!-- ─── NAV ───────────────────────────── -->
 <nav class="nav" id="nav">
   <div class="nav-logo">Dejah White</div>
   <ul class="nav-links">
@@ -720,7 +720,7 @@
   <a href="contact.html">Contact</a>
 </div>
 
-<!-- ─── LOADING SKELETON ──────────────────── -->
+<!-- ─── LOADING SKELETON ─────────────────── -->
 <div class="skeleton-page" id="skeleton">
   <div class="skeleton-back-bar"><div class="sk sk-back"></div></div>
   <div class="skeleton-header">
@@ -739,7 +739,7 @@
   </div>
 </div>
 
-<!-- ─── ERROR STATE ────────────────────── -->
+<!-- ─── ERROR STATE ───────────────────── -->
 <div class="error-state" id="error-state" style="display:none;">
   <div class="error-icon">✦</div>
   <div class="error-title">Post Not Found</div>
@@ -881,23 +881,23 @@
 (function () {
   'use strict';
 
-  /* ── CONFIG ──────────────────────────── */
+  /* ── CONFIG ───────────────────────────── */
   var CLIENT_ID = '897cba15-c5fb-4204-a89b-81bbca8b6f4e';
   var SITE_ID   = 'ee0295b0-5a24-47cd-8610-58c1b5e46882';
   var TOKEN_URL = 'https://www.wixapis.com/oauth2/token';
   var BLOG_BASE = 'https://www.wixapis.com/blog/v3/posts/slugs/';
   var CRM_URL   = 'https://www.wixapis.com/contacts/v4/contacts';
 
-  /* ── FOOTER YEAR ────────────────────── */
+  /* ── FOOTER YEAR ───────────────────────── */
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-  /* ── NAV HAMBURGER ──────────────────── */
+  /* ── NAV HAMBURGER ────────────────────── */
   document.getElementById('hamburger').addEventListener('click', function () {
     var menu = document.getElementById('mobile-menu');
     menu.classList.toggle('open');
   });
 
-  /* ── HELPERS ───────────────────────── */
+  /* ── HELPERS ─────────────────────────── */
   function escapeHtml(str) {
     if (typeof str !== 'string') return '';
     return str
@@ -916,7 +916,7 @@
     } catch (e) { return ''; }
   }
 
-  /* ── VISITOR TOKEN ──────────────────── */
+  /* ── VISITOR TOKEN ────────────────────── */
   var _cachedToken = null;
 
   function getVisitorToken() {
@@ -939,14 +939,13 @@
     });
   }
 
-  /* ── WIX REQUEST ───────────────────── */
+  /* ── WIX REQUEST ─────────────────────── */
   function wixRequest(url, token, options) {
     var opts = options || {};
     return fetch(url, {
       method: opts.method || 'GET',
       headers: {
         'Authorization': 'Bearer ' + token,
-        'wix-site-id': SITE_ID,
         'Content-Type': 'application/json'
       },
       body: opts.body || undefined
@@ -957,7 +956,7 @@
     });
   }
 
-  /* ── RICH CONTENT RENDERER ───────────── */
+  /* ── RICH CONTENT RENDERER ─────────────── */
   function renderRichContent(richContent) {
     if (!richContent || !Array.isArray(richContent.nodes) || richContent.nodes.length === 0) {
       return null;
@@ -1098,11 +1097,23 @@
     return result;
   }
 
-  /* ── FETCH POST ────────────────────── */
+  /* ── FETCH POST ──────────────────────── */
+  var CATEGORY_MAP = {};
+
   function fetchPost(slug) {
     getVisitorToken()
       .then(function (token) {
-        return wixRequest(
+        var catReq = wixRequest(
+          'https://www.wixapis.com/blog/v3/categories/query',
+          token,
+          { method: 'POST', body: JSON.stringify({ paging: { limit: 50 } }) }
+        ).then(function (cd) {
+          (cd.categories || []).forEach(function (c) {
+            CATEGORY_MAP[c.id] = c.label || c.title || '';
+          });
+        }).catch(function () {});
+
+        var postReq = wixRequest(
           'https://www.wixapis.com/blog/v3/posts/query',
           token,
           {
@@ -1114,6 +1125,7 @@
             })
           }
         );
+        return Promise.all([catReq, postReq]).then(function (r) { return r[1]; });
       })
       .then(function (data) {
         var post = data && data.posts && data.posts[0];
@@ -1126,7 +1138,7 @@
       });
   }
 
-  /* ── RENDER POST ───────────────────── */
+  /* ── RENDER POST ─────────────────────── */
   function renderPost(post) {
     // Title & meta
     var title = post.title || 'Untitled';
@@ -1140,9 +1152,15 @@
       dateEl.textContent = formatDate(post.firstPublishedDate);
     }
 
-    // Category from hashtags
-    if (post.hashtags && post.hashtags.length > 0) {
-      document.getElementById('post-category').textContent = post.hashtags[0];
+    // Category from categoryIds (fallback to hashtags)
+    var catLabel = null;
+    if (post.categoryIds && post.categoryIds.length > 0 && CATEGORY_MAP[post.categoryIds[0]]) {
+      catLabel = CATEGORY_MAP[post.categoryIds[0]];
+    } else if (post.hashtags && post.hashtags.length > 0) {
+      catLabel = post.hashtags[0];
+    }
+    if (catLabel) {
+      document.getElementById('post-category').textContent = catLabel;
     }
 
     // Hero image
@@ -1194,7 +1212,7 @@
     document.getElementById('post-area').style.display = 'block';
   }
 
-  /* ── UI STATES ────────────────────── */
+  /* ── UI STATES ──────────────────────── */
   function hideSkeleton() {
     var sk = document.getElementById('skeleton');
     if (sk) sk.style.display = 'none';
@@ -1205,7 +1223,7 @@
     document.getElementById('error-state').style.display = 'flex';
   }
 
-  /* ── NEWSLETTER ───────────────────── */
+  /* ── NEWSLETTER ─────────────────────── */
   document.getElementById('newsletter-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var form = this;
@@ -1227,19 +1245,18 @@
           method: 'POST',
           headers: {
             'Authorization': 'Bearer ' + token,
-            'wix-site-id': SITE_ID,
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            contact: {
+            info: {
               name: { first: firstName },
-              emails: [{ tag: 'MAIN', email: email }]
+              emails: { items: [{ tag: 'MAIN', email: email }] }
             }
           })
         });
       })
       .then(function (res) {
-        if (!res.ok) return res.json().then(function (d) { throw new Error(JSON.stringify(d)); });
+        if (!res.ok && res.status !== 409) return res.json().then(function (d) { throw new Error(JSON.stringify(d)); });
         return res.json();
       })
       .then(function () {
@@ -1254,7 +1271,7 @@
       });
   });
 
-  /* ── INIT ─────────────────────────── */
+  /* ── INIT ───────────────────────────── */
   var params = new URLSearchParams(window.location.search);
   var slug = params.get('slug');
   if (!slug) {

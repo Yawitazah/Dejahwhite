@@ -787,7 +787,6 @@
         var opts = options || {};
         opts.headers = Object.assign({}, opts.headers || {}, {
           'Authorization': 'Bearer ' + token,
-          'wix-site-id':   WIX_SITE_ID,
           'Content-Type':  'application/json'
         });
         return fetch(url, opts);
@@ -827,7 +826,26 @@
       }
     }
 
+    var CATEGORY_MAP = {};
+
+    function loadCategories() {
+      return wixRequest('https://www.wixapis.com/blog/v3/categories/query', {
+        method: 'POST',
+        body: JSON.stringify({ paging: { limit: 50 } })
+      })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        (data.categories || []).forEach(function (c) {
+          CATEGORY_MAP[c.id] = c.label || c.title || '';
+        });
+      })
+      .catch(function () {});
+    }
+
     function getCategory(post) {
+      if (post.categoryIds && post.categoryIds.length > 0 && CATEGORY_MAP[post.categoryIds[0]]) {
+        return CATEGORY_MAP[post.categoryIds[0]];
+      }
       if (post.hashtags && post.hashtags.length > 0) {
         return post.hashtags[0];
       }
@@ -940,8 +958,8 @@
       loadPosts(true);
     });
 
-    // Kick off initial load
-    loadPosts(false);
+    // Kick off initial load (categories first, then posts)
+    loadCategories().then(function () { loadPosts(false); });
 
     /* ─── NEWSLETTER ─── */
     (function () {
