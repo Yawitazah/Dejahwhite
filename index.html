@@ -303,7 +303,7 @@ img { display: block; max-width: 100%; }
     </div>
   </div>
   <div class="hero-banner">
-    <img src="https://static.wixstatic.com/media/037c75_9aba4b5e5c7449c3a6f4c7e7fb03f95d~mv2.jpg" alt="Dejah White &mdash; Bimini Beach Club">
+    <img src="https://static.wixstatic.com/media/037c75_9aba4b5e5c7449c3a6f4c7e7fb03f95d~mv2.jpg" alt="Dejah White — Bimini Beach Club">
   </div>
 </section>
 
@@ -467,14 +467,16 @@ img { display: block; max-width: 100%; }
         <a href="about.html">About</a>
         <a href="blog.html">Blog</a>
         <a href="travel.html">Travel</a>
+        <a href="contact.html">Contact</a>
       </nav>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">&copy; 2026 Dejah White &middot; Faith First, Family Close</span>
       <div class="footer-social">
-        <a href="#">Instagram</a>
-        <a href="#">Pinterest</a>
-        <a href="#">YouTube</a>
+        <a href="https://www.instagram.com/dejahwhitetravel" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/dejahwhitetravel" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.tiktok.com/@thedejahwhite" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.youtube.com/dejahshardae" target="_blank" rel="noopener">YouTube</a>
       </div>
     </div>
   </div>
@@ -583,7 +585,7 @@ img { display: block; max-width: 100%; }
         imgEl.src = featured.media.wixMedia.image.url + '/v1/fill/w_800,h_533,al_c,q_80/file.jpg';
         imgEl.alt = featured.title;
       }
-      if (linkEl && featured.slug) linkEl.href = 'blog/' + featured.slug;
+      if (linkEl && featured.slug) linkEl.href = 'blog-post.html?slug=' + featured.slug;
       if (catEl) catEl.textContent = 'Blog';
       if (dateEl) dateEl.textContent = fmtDate(featured.firstPublishedDate);
       if (titleEl) titleEl.textContent = featured.title;
@@ -600,7 +602,7 @@ img { display: block; max-width: 100%; }
         if (c) c.textContent = 'Blog';
         if (d) d.textContent = fmtDate(post.firstPublishedDate);
         if (t) t.textContent = post.title;
-        if (post.slug) sideItems[i].href = 'blog/' + post.slug;
+        if (post.slug) sideItems[i].href = 'blog-post.html?slug=' + post.slug;
       }
     })
     .catch(function() {});
