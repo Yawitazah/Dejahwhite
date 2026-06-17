@@ -103,6 +103,8 @@
     .footer-legal a:hover { color: var(--turq); }
     @media (max-width: 900px) { .nav { padding: 0 28px; } .nav-links { display: none; } .hamburger { display: flex; } .contact-hero { padding: 64px 24px 56px; } .contact-hero h1 { font-size: 36px; } .contact-section { padding: 56px 24px; } .contact-inner { grid-template-columns: 1fr; gap: 56px; } .form-row { grid-template-columns: 1fr; gap: 0; } .footer { padding: 48px 24px 36px; } .footer-top { flex-direction: column; gap: 32px; margin-bottom: 32px; } .footer-nav { flex-direction: column; gap: 24px; } .footer-bottom { flex-direction: column; align-items: flex-start; } }
   </style>
+<link rel="stylesheet" href="editor/theme.css">
+<link rel="stylesheet" href="editor/editor.css">
 </head>
 <body>
   <nav class="nav" id="nav">
@@ -213,5 +215,6 @@
     firstNameInput.addEventListener('input', () => { firstNameInput.classList.remove('error'); firstNameErr.classList.remove('visible'); });
     emailInput.addEventListener('input', () => { emailInput.classList.remove('error'); emailErr.classList.remove('visible'); });
   </script>
+<script src="editor/editor.js" defer></script>
 </body>
 </html>
