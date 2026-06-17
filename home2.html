@@ -197,6 +197,8 @@ img { display: block; max-width: 100%; }
 @media (max-width: 768px) { .footer { padding: 48px 32px 36px; } .footer-top { flex-direction: column; } .footer-links { gap: 24px; } .footer-bottom { flex-direction: column; align-items: flex-start; } }
 @media (max-width: 600px) { .footer { padding: 44px 24px 36px; } }
 </style>
+<link rel="stylesheet" href="editor/theme.css">
+<link rel="stylesheet" href="editor/editor.css">
 </head>
 <body>
 
@@ -565,5 +567,6 @@ img { display: block; max-width: 100%; }
   loadCategories().then(loadBlogPosts);
 </script>
 
+<script src="editor/editor.js" defer></script>
 </body>
 </html>
