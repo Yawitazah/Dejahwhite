@@ -7,7 +7,7 @@
 <title>Dejah White Travel &mdash; Turning Trips Into Income</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700;900&family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #F6F4EF;
@@ -31,10 +31,28 @@
   p.lede { font-size: 16px; line-height: 1.65; margin-top: 14px; }
   .rule { width: 54px; height: 3px; background: var(--brand); margin-top: 8px; }
 
-  .topbar { background: var(--ink); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-  @media (min-width: 768px) { .topbar { padding: 16px 44px; } }
-  .topbar .wm { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; letter-spacing: 0.2em; color: var(--ivory); text-transform: uppercase; }
-  .topbar .tg { font-size: 9.5px; letter-spacing: 0.22em; color: var(--brand); text-transform: uppercase; }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 30px 70px; border-bottom: 1px solid rgba(11,46,43,0.1); background: var(--paper); position: sticky; top: 0; z-index: 100; }
+  .nav-logo { font-family: 'Libre Baskerville', Georgia, serif; font-weight: 700; font-size: 18px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; align-items: center; gap: 38px; list-style: none; margin: 0; padding: 0; }
+  .nav-links a { font-family: 'Lato', sans-serif; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #4a564f; font-weight: 400; padding-top: 4px; transition: color 0.15s; text-decoration: none; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links .active a { color: var(--ink); font-weight: 700; border-top: 2px solid var(--brand); }
+  .nav-links .nav-alt a { color: var(--brand-deep); font-weight: 700; font-size: 11px; }
+  .nav-links .soon { color: #b3ab9c; display: flex; align-items: center; gap: 7px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-family: 'Lato', sans-serif; font-weight: 400; }
+  .nav-links .soon-badge { font-size: 8px; letter-spacing: 0.12em; color: var(--brand-deep); border: 1px solid rgba(19,122,111,0.4); border-radius: 3px; padding: 2px 5px; }
+  .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; }
+  .hamburger span:nth-child(1), .hamburger span:nth-child(2) { width: 22px; height: 1.5px; background: var(--ink); }
+  .hamburger span:nth-child(3) { width: 14px; height: 1.5px; background: var(--brand); }
+  .nav-mobile-menu { display: none; flex-direction: column; background: var(--paper); border-bottom: 1px solid rgba(11,46,43,0.1); padding: 16px 24px 24px; gap: 18px; }
+  .nav-mobile-menu a { font-family: 'Lato', sans-serif; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); font-weight: 700; text-decoration: none; }
+  .nav-mobile-menu .mobile-alt { color: var(--brand-deep); font-size: 12px; }
+  .nav-mobile-menu.open { display: flex; }
+  @media (max-width: 768px) {
+    .nav { padding: 22px 24px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
 
   .herophoto { width: 100%; height: clamp(220px, 35vw, 380px); object-fit: cover; object-position: 50% 38%; display: block; }
   .hero { background: var(--ink); color: var(--ivory); padding: 42px 0 52px; }
@@ -105,9 +123,27 @@
 </head>
 <body>
 
-  <div class="topbar">
-    <span class="wm">Dejah White</span>
-    <span class="tg">Faith First &middot; Family Close</span>
+  <nav class="nav" id="nav">
+    <a class="nav-logo" href="index.html">Dejah White</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="nav-alt"><a href="home2.html">Home ◆</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li class="active"><a href="travel.html">Travel</a></li>
+      <li class="soon">Shop <span class="soon-badge">Soon</span></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="home2.html" class="mobile-alt">Home ◆</a>
+    <a href="about.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="travel.html">Travel</a>
+    <a href="contact.html">Contact</a>
   </div>
 
   <img class="herophoto" src="https://static.wixstatic.com/media/037c75_9aba4b5e5c7449c3a6f4c7e7fb03f95d~mv2.jpg" alt="Tropical beach resort with pool and ocean view">
@@ -222,6 +258,10 @@
   </div>
 
   <script>
+    document.getElementById('hamburger').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    });
+
     var WIX_CLIENT_ID = '897cba15-c5fb-4204-a89b-81bbca8b6f4e';
     var WIX_SITE_ID   = 'ee0295b0-5a24-47cd-8610-58c1b5e46882';
 
@@ -232,7 +272,9 @@
     var firstNameInput = document.getElementById('firstName');
     var emailInput     = document.getElementById('email');
 
-    function validateEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -248,6 +290,7 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
 
+      // Get anonymous visitor token, then create Wix contact
       fetch('https://www.wixapis.com/oauth2/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -272,6 +315,7 @@
         });
       })
       .then(function(res) {
+        // 409 = contact already exists, still treat as success
         if (!res.ok && res.status !== 409) throw new Error('Server error ' + res.status);
         form.style.display = 'none';
         formSuccess.style.display = 'block';
