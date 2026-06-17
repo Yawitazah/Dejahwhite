@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &mdash; Dejah White</title>
+  <meta name="description" content="Get in touch with Dejah White &mdash; travel content creator, entrepreneur, and business mentor." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink: #0B2E2B; --teal: #137A6F; --turq: #52D4C8; --paper: #F6F4EF; --greige: #ECE8DF; --warm: #5b5448; --muted: #6E665B; --faint: #b3ab9c; --footer: #082421; --serif: 'Libre Baskerville', Georgia, serif; --sans: 'Lato', -apple-system, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; }
+    .nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 70px; height: 72px; background: var(--paper); border-bottom: 1px solid rgba(11,46,43,0.09); }
+    .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: 0.02em; white-space: nowrap; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-links .active a { color: var(--teal); }
+    .nav-alt a { opacity: 0.55; font-size: 11px !important; }
+    .soon { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); cursor: default; }
+    .soon-badge { font-size: 9px; font-weight: 900; letter-spacing: 0.08em; background: var(--turq); color: var(--ink); padding: 2px 6px; border-radius: 20px; text-transform: uppercase; }
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.25s; }
+    .nav-mobile-menu { display: none; flex-direction: column; gap: 0; background: var(--paper); border-bottom: 1px solid rgba(11,46,43,0.09); }
+    .nav-mobile-menu a { display: block; padding: 16px 28px; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm); border-bottom: 1px solid rgba(11,46,43,0.06); transition: background 0.15s, color 0.15s; }
+    .nav-mobile-menu a:hover { background: var(--greige); color: var(--teal); }
+    .nav-mobile-menu a.mobile-alt { opacity: 0.5; font-size: 11px; }
+    .nav-mobile-menu.open { display: flex; }
+    .contact-hero { background: var(--greige); padding: 96px 70px 80px; text-align: center; }
+    .overline { display: inline-flex; align-items: center; gap: 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 24px; }
+    .overline::before, .overline::after { content: ''; display: block; width: 32px; height: 2px; background: var(--turq); border-radius: 1px; }
+    .contact-hero h1 { font-family: var(--serif); font-size: 56px; font-weight: 700; color: var(--ink); line-height: 1.1; margin-bottom: 24px; }
+    .contact-hero p { font-size: 18px; color: var(--warm); max-width: 520px; margin: 0 auto; line-height: 1.65; }
+    .contact-section { background: var(--paper); padding: 100px 70px; }
+    .contact-inner { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: start; }
+    .contact-form { display: flex; flex-direction: column; gap: 0; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; margin-bottom: 22px; }
+    .form-label { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .form-input, .form-select, .form-textarea { font-family: var(--sans); font-size: 15px; color: var(--ink); background: #fff; border: 1px solid #cdc7ba; border-radius: 6px; padding: 14px 17px; width: 100%; outline: none; transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; appearance: none; }
+    .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236E665B' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer; }
+    .form-textarea { min-height: 160px; resize: vertical; line-height: 1.6; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(19,122,111,0.12); }
+    .form-input.error, .form-select.error, .form-textarea.error { border-color: #c0392b; box-shadow: 0 0 0 3px rgba(192,57,43,0.1); }
+    .field-error { font-size: 11px; color: #c0392b; margin-top: 5px; display: none; }
+    .field-error.visible { display: block; }
+    .form-submit { display: block; width: 100%; padding: 16px 24px; background: var(--teal); color: #fff; font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s, transform 0.1s, opacity 0.2s; margin-top: 4px; }
+    .form-submit:hover:not(:disabled) { background: #0f6560; }
+    .form-submit:active:not(:disabled) { transform: translateY(1px); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .form-success { display: none; background: rgba(82,212,200,0.12); border: 1px solid rgba(19,122,111,0.25); border-radius: 8px; padding: 28px 32px; text-align: center; }
+    .form-success.visible { display: block; }
+    .form-success-icon { font-size: 32px; margin-bottom: 12px; }
+    .form-success h3 { font-family: var(--serif); font-size: 22px; color: var(--ink); margin-bottom: 10px; }
+    .form-success p { font-size: 15px; color: var(--warm); line-height: 1.6; }
+    .form-api-error { display: none; background: rgba(192,57,43,0.07); border: 1px solid rgba(192,57,43,0.2); border-radius: 6px; padding: 14px 18px; font-size: 14px; color: #c0392b; margin-bottom: 20px; }
+    .form-api-error.visible { display: block; }
+    .info-heading { font-family: var(--serif); font-size: 28px; color: var(--ink); margin-bottom: 28px; line-height: 1.2; }
+    .info-email-block { margin-bottom: 28px; }
+    .info-email-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .info-email-link { font-size: 16px; font-weight: 700; color: var(--teal); transition: color 0.2s; }
+    .info-email-link:hover { color: var(--ink); }
+    .social-list { margin-bottom: 28px; }
+    .social-list-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .social-item { border-bottom: 1px solid rgba(11,46,43,0.08); }
+    .social-link { display: flex; align-items: center; gap: 12px; padding: 12px 0; transition: opacity 0.2s; }
+    .social-link:hover { opacity: 0.75; }
+    .social-icon { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: var(--greige); flex-shrink: 0; }
+    .social-icon svg { width: 18px; height: 18px; }
+    .social-platform { font-size: 13px; font-weight: 700; color: var(--ink); display: block; line-height: 1.2; }
+    .social-handle { font-size: 12px; color: var(--muted); display: block; line-height: 1.4; }
+    .response-note { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 28px; }
+    .turq-rule { border: none; border-top: 1.5px solid var(--turq); margin-bottom: 28px; opacity: 0.5; }
+    .travel-cta-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .travel-cta-heading { font-family: var(--serif); font-size: 17px; color: var(--ink); margin-bottom: 10px; line-height: 1.3; }
+    .travel-cta-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); transition: gap 0.2s, color 0.2s; }
+    .travel-cta-link:hover { gap: 10px; color: var(--ink); }
+    .travel-cta-link svg { width: 14px; height: 14px; }
+    .footer { background: var(--footer); color: rgba(246,244,239,0.65); padding: 64px 70px 48px; }
+    .footer-inner { max-width: 980px; margin: 0 auto; }
+    .footer-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; margin-bottom: 48px; flex-wrap: wrap; }
+    .footer-logo { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--paper); margin-bottom: 10px; }
+    .footer-tagline { font-size: 13px; color: rgba(246,244,239,0.5); max-width: 240px; line-height: 1.6; }
+    .footer-nav { display: flex; gap: 56px; }
+    .footer-nav-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(246,244,239,0.35); margin-bottom: 16px; }
+    .footer-nav-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-nav-links a { font-size: 13px; color: rgba(246,244,239,0.65); transition: color 0.2s; }
+    .footer-nav-links a:hover { color: var(--turq); }
+    .footer-social { display: flex; gap: 12px; }
+    .footer-social-link { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 8px; background: rgba(246,244,239,0.07); transition: background 0.2s; }
+    .footer-social-link:hover { background: rgba(82,212,200,0.18); }
+    .footer-social-link svg { width: 17px; height: 17px; fill: rgba(246,244,239,0.7); }
+    .footer-bottom { border-top: 1px solid rgba(246,244,239,0.1); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(246,244,239,0.35); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 12px; color: rgba(246,244,239,0.35); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--turq); }
+    @media (max-width: 900px) { .nav { padding: 0 28px; } .nav-links { display: none; } .hamburger { display: flex; } .contact-hero { padding: 64px 24px 56px; } .contact-hero h1 { font-size: 36px; } .contact-section { padding: 56px 24px; } .contact-inner { grid-template-columns: 1fr; gap: 56px; } .form-row { grid-template-columns: 1fr; gap: 0; } .footer { padding: 48px 24px 36px; } .footer-top { flex-direction: column; gap: 32px; margin-bottom: 32px; } .footer-nav { flex-direction: column; gap: 24px; } .footer-bottom { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-logo">Dejah White</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="nav-alt"><a href="home2.html">Home &#9670;</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li class="active"><a href="contact.html">Contact</a></li>
+      <li class="soon">Shop <span class="soon-badge">Soon</span></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="nav-mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="home2.html" class="mobile-alt">Home &#9670;</a>
+    <a href="about.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="travel.html">Travel</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <section class="contact-hero">
+    <div class="overline">Get in Touch</div>
+    <h1>Let's connect.</h1>
+    <p>Whether you have a question, want to collaborate, or are ready to start your journey &mdash; I'd love to hear from you.</p>
+  </section>
+  <section class="contact-section">
+    <div class="contact-inner">
+      <div class="form-col">
+        <div class="form-api-error" id="api-error">Something went wrong. Please try again or email me directly at <a href="mailto:dejahwhitetravel@gmail.com" style="color:inherit;font-weight:700;">dejahwhitetravel@gmail.com</a>.</div>
+        <div class="form-success" id="form-success"><div class="form-success-icon">&#x2709;&#xFE0F;</div><h3>Message received!</h3><p>Thank you! Your message has been received. I'll be in touch soon.</p></div>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label" for="first-name">First Name <span aria-hidden="true">*</span></label><input class="form-input" type="text" id="first-name" name="firstName" autocomplete="given-name" placeholder="First" /><span class="field-error" id="first-name-error">Please enter your first name.</span></div>
+            <div class="form-group"><label class="form-label" for="last-name">Last Name</label><input class="form-input" type="text" id="last-name" name="lastName" autocomplete="family-name" placeholder="Last" /></div>
+          </div>
+          <div class="form-group"><label class="form-label" for="email">Email Address <span aria-hidden="true">*</span></label><input class="form-input" type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" /><span class="field-error" id="email-error">Please enter a valid email address.</span></div>
+          <div class="form-group"><label class="form-label" for="subject">Subject</label><select class="form-select" id="subject" name="subject"><option value="General Inquiry">General Inquiry</option><option value="Travel Business">Travel Business</option><option value="Collaboration">Collaboration</option><option value="Speaking">Speaking</option></select></div>
+          <div class="form-group"><label class="form-label" for="message">Message</label><textarea class="form-textarea" id="message" name="message" placeholder="Tell me what's on your mind…"></textarea></div>
+          <button class="form-submit" type="submit" id="submit-btn">Send Message</button>
+        </form>
+      </div>
+      <div class="info-col">
+        <h2 class="info-heading">Connect with me</h2>
+        <div class="info-email-block"><div class="info-email-label">Email</div><a class="info-email-link" href="mailto:dejahwhitetravel@gmail.com">dejahwhitetravel@gmail.com</a></div>
+        <div class="social-list">
+          <div class="social-list-label">Social Media</div>
+          <div class="social-item"><a class="social-link" href="https://www.instagram.com/dejahwhitetravel" target="_blank" rel="noopener noreferrer"><div class="social-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5.5" stroke="#137A6F" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" stroke="#137A6F" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="#137A6F"/></svg></div><div class="social-text"><span class="social-platform">Instagram</span><span class="social-handle">@dejahwhitetravel</span></div></a></div>
+          <div class="social-item"><a class="social-link" href="https://www.facebook.com/dejahwhitetravel" target="_blank" rel="noopener noreferrer"><div class="social-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="#137A6F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="social-text"><span class="social-platform">Facebook</span><span class="social-handle">/dejahwhitetravel</span></div></a></div>
+          <div class="social-item"><a class="social-link" href="https://www.tiktok.com/@thedejahwhite" target="_blank" rel="noopener noreferrer"><div class="social-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="#137A6F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="social-text"><span class="social-platform">TikTok</span><span class="social-handle">@thedejahwhite</span></div></a></div>
+          <div class="social-item"><a class="social-link" href="https://www.youtube.com/dejahshardae" target="_blank" rel="noopener noreferrer"><div class="social-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" stroke="#137A6F" stroke-width="1.8"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="#137A6F" stroke-width="1.8" stroke-linejoin="round"/></svg></div><div class="social-text"><span class="social-platform">YouTube</span><span class="social-handle">/dejahshardae</span></div></a></div>
+        </div>
+        <p class="response-note">I typically respond within 48 hours.</p>
+        <hr class="turq-rule" />
+        <div class="travel-cta-block"><div class="travel-cta-label">Start Your Journey</div><h3 class="travel-cta-heading">Looking to start a travel business?</h3><a class="travel-cta-link" href="travel.html">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="footer-logo">Dejah White</div><div class="footer-tagline">Travel creator, entrepreneur &amp; business mentor.</div></div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-col"><div class="footer-nav-label">Pages</div><div class="footer-nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="blog.html">Blog</a><a href="travel.html">Travel</a><a href="contact.html">Contact</a></div></div>
+        </nav>
+        <div class="footer-social-col">
+          <div style="color:rgba(246,244,239,0.35);font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:16px;">Follow Along</div>
+          <div class="footer-social">
+            <a class="footer-social-link" href="https://www.instagram.com/dejahwhitetravel" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <a class="footer-social-link" href="https://www.facebook.com/dejahwhitetravel" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a class="footer-social-link" href="https://www.tiktok.com/@thedejahwhite" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg></a>
+            <a class="footer-social-link" href="https://www.youtube.com/dejahshardae" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom"><div class="footer-copy">&copy; <span id="footer-year"></span> Dejah White. All rights reserved.</div><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a></div></div>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+    const hamburger = document.getElementById('hamburger'), mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => { const isOpen = mobileMenu.classList.toggle('open'); hamburger.setAttribute('aria-expanded', isOpen); });
+    const WIX_CLIENT_ID = '897cba15-c5fb-4204-a89b-81bbca8b6f4e', WIX_BASE = 'https://www.wixapis.com';
+    async function getVisitorToken() { const res = await fetch(`${WIX_BASE}/oauth2/token`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ clientId: WIX_CLIENT_ID, grantType: 'anonymous' }) }); if (!res.ok) throw new Error('Token failed'); const data = await res.json(); return data.access_token; }
+    async function wixRequest(token, method, path, body) { const res = await fetch(`${WIX_BASE}${path}`, { method, headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: body ? JSON.stringify(body) : undefined }); return { status: res.status, data: res.ok ? await res.json() : null }; }
+    const form = document.getElementById('contact-form'), submitBtn = document.getElementById('submit-btn'), successDiv = document.getElementById('form-success'), apiErrDiv = document.getElementById('api-error');
+    const firstNameInput = document.getElementById('first-name'), emailInput = document.getElementById('email'), lastNameInput = document.getElementById('last-name'), subjectInput = document.getElementById('subject'), messageInput = document.getElementById('message');
+    const firstNameErr = document.getElementById('first-name-error'), emailErr = document.getElementById('email-error');
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function clearErrors() { [firstNameInput, emailInput].forEach(el => el.classList.remove('error')); [firstNameErr, emailErr].forEach(el => el.classList.remove('visible')); apiErrDiv.classList.remove('visible'); }
+    function validate(firstName, email) { let valid = true; if (!firstName) { firstNameInput.classList.add('error'); firstNameErr.classList.add('visible'); valid = false; } if (!email || !EMAIL_RE.test(email)) { emailInput.classList.add('error'); emailErr.classList.add('visible'); valid = false; } return valid; }
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); clearErrors();
+      const firstName = firstNameInput.value.trim(), lastName = lastNameInput.value.trim(), email = emailInput.value.trim(), subject = subjectInput.value, message = messageInput.value.trim();
+      if (!validate(firstName, email)) return;
+      submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
+      try {
+        const token = await getVisitorToken();
+        const { status, data } = await wixRequest(token, 'POST', '/contacts/v4/contacts', { info: { name: { first: firstName, last: lastName || undefined }, emails: { items: [{ tag: 'MAIN', email }] } } });
+        if (status !== 200 && status !== 201 && status !== 409) throw new Error('Contact failed: ' + status);
+        const contactId = data && data.contact && data.contact.id;
+        if (contactId) { try { await wixRequest(token, 'POST', `/contacts/v4/contacts/${contactId}/notes`, { note: { content: `Subject: ${subject}\n\nMessage: ${message || '(no message)'}` } }); } catch (_) {} }
+        form.style.display = 'none'; successDiv.classList.add('visible');
+      } catch (err) { console.error(err); apiErrDiv.classList.add('visible'); emailInput.classList.add('error'); submitBtn.disabled = false; submitBtn.textContent = 'Send Message'; }
+    });
+    firstNameInput.addEventListener('input', () => { firstNameInput.classList.remove('error'); firstNameErr.classList.remove('visible'); });
+    emailInput.addEventListener('input', () => { emailInput.classList.remove('error'); emailErr.classList.remove('visible'); });
+  </script>
+</body>
+</html>
