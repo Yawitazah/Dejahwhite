@@ -8,153 +8,642 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
   <style>
-    :root { --ink: #0B2E2B; --teal: #137A6F; --turq: #52D4C8; --paper: #F6F4EF; --greige: #ECE8DF; --warm: #5b5448; --muted: #6E665B; --faint: #b3ab9c; --footer: #082421; --serif: 'Libre Baskerville', Georgia, serif; --sans: 'Lato', -apple-system, sans-serif; }
+    /* ─── TOKENS ─── */
+    :root {
+      --ink:    #0B2E2B;
+      --teal:   #137A6F;
+      --turq:   #52D4C8;
+      --paper:  #F6F4EF;
+      --greige: #ECE8DF;
+      --warm:   #5b5448;
+      --muted:  #6E665B;
+      --faint:  #b3ab9c;
+      --footer: #082421;
+      --serif:  'Libre Baskerville', Georgia, serif;
+      --sans:   'Lato', -apple-system, sans-serif;
+    }
+
+    /* ─── RESET ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
     ul { list-style: none; }
     button { cursor: pointer; border: none; background: none; font: inherit; }
-    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 72px; background: var(--paper); border-bottom: 1px solid var(--greige); transition: box-shadow 0.3s; }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      height: 72px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--greige);
+      transition: box-shadow 0.3s;
+    }
     .nav.scrolled { box-shadow: 0 2px 20px rgba(11,46,43,.08); }
-    .nav-logo { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: 0.03em; white-space: nowrap; }
-    .nav-links { display: flex; align-items: center; gap: 36px; }
-    .nav-links a { font-family: var(--sans); font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm); transition: color 0.2s; }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm);
+      transition: color 0.2s;
+    }
     .nav-links a:hover { color: var(--teal); }
     .nav-links .active a { color: var(--teal); }
     .nav-links .nav-alt a { color: var(--faint); font-size: 11px; }
     .nav-links .soon a { color: var(--faint); pointer-events: none; }
-    .soon-badge { display: inline-block; background: var(--greige); color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; margin-left: 5px; vertical-align: middle; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; width: 28px; padding: 4px 0; }
-    .hamburger span { display: block; height: 1.5px; background: var(--ink); transition: transform 0.3s, opacity 0.3s; }
+    .soon-badge {
+      display: inline-block;
+      background: var(--greige);
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 2px;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      width: 28px;
+      padding: 4px 0;
+    }
+    .hamburger span {
+      display: block;
+      height: 1.5px;
+      background: var(--ink);
+      transition: transform 0.3s, opacity 0.3s;
+    }
     .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .nav-mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 99; background: var(--paper); border-bottom: 1px solid var(--greige); flex-direction: column; padding: 24px 40px 32px; gap: 20px; box-shadow: 0 8px 32px rgba(11,46,43,.1); }
+
+    /* ─── MOBILE MENU ─── */
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      z-index: 99;
+      background: var(--paper);
+      border-bottom: 1px solid var(--greige);
+      flex-direction: column;
+      padding: 24px 40px 32px;
+      gap: 20px;
+      box-shadow: 0 8px 32px rgba(11,46,43,.1);
+    }
     .nav-mobile-menu.open { display: flex; }
-    .nav-mobile-menu a { font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm); padding: 4px 0; border-bottom: 1px solid var(--greige); }
+    .nav-mobile-menu a {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm);
+      padding: 4px 0;
+      border-bottom: 1px solid var(--greige);
+    }
     .nav-mobile-menu a:last-child { border-bottom: none; }
     .nav-mobile-menu a.mobile-alt { color: var(--faint); font-size: 11px; }
-    .blog-hero { background: var(--paper); padding: 160px 60px 80px; text-align: center; }
-    .overline { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 28px; }
-    .overline-rule { width: 40px; height: 1.5px; background: var(--turq); }
-    .overline-text { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); }
-    .blog-hero h1 { font-family: var(--serif); font-size: 56px; font-weight: 400; line-height: 1.15; color: var(--ink); max-width: 740px; margin: 0 auto 24px; }
-    .blog-hero-sub { font-family: var(--sans); font-size: 18px; font-weight: 300; color: var(--warm); max-width: 480px; margin: 0 auto; line-height: 1.7; }
-    .blog-grid-section { background: var(--greige); padding: 80px 60px; }
-    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; max-width: 1180px; margin: 0 auto; }
-    .skeleton-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; max-width: 1180px; margin: 0 auto; }
-    .skeleton-card { background: #fff; border-radius: 2px; overflow: hidden; }
-    .skeleton-img { width: 100%; aspect-ratio: 3/2; background: var(--greige); animation: pulse 1.5s ease-in-out infinite; }
+
+    /* ─── PAGE HERO ─── */
+    .blog-hero {
+      background: var(--paper);
+      padding: 160px 60px 80px;
+      text-align: center;
+    }
+    .overline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .overline-rule {
+      width: 40px;
+      height: 1.5px;
+      background: var(--turq);
+    }
+    .overline-text {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+    .blog-hero h1 {
+      font-family: var(--serif);
+      font-size: 56px;
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink);
+      max-width: 740px;
+      margin: 0 auto 24px;
+    }
+    .blog-hero-sub {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--warm);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── BLOG GRID ─── */
+    .blog-grid-section {
+      background: var(--greige);
+      padding: 80px 60px;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px 32px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* ─── SKELETON ─── */
+    .skeleton-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px 32px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .skeleton-card {
+      background: #fff;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .skeleton-img {
+      width: 100%;
+      aspect-ratio: 3/2;
+      background: var(--greige);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
     .skeleton-body { padding: 20px 22px 24px; }
-    .skeleton-line { height: 12px; border-radius: 2px; background: var(--greige); animation: pulse 1.5s ease-in-out infinite; margin-bottom: 10px; }
-    .skeleton-line.short { width: 55%; } .skeleton-line.medium { width: 80%; } .skeleton-line.long { width: 100%; } .skeleton-line.title { height: 18px; margin-bottom: 14px; }
-    @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.7; } }
-    .blog-card { background: #fff; border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s ease, box-shadow 0.25s ease; text-decoration: none; color: var(--ink); }
-    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(11,46,43,.10); }
-    .card-image-wrap { width: 100%; aspect-ratio: 3/2; overflow: hidden; position: relative; background: var(--greige); flex-shrink: 0; }
-    .card-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .skeleton-line {
+      height: 12px;
+      border-radius: 2px;
+      background: var(--greige);
+      animation: pulse 1.5s ease-in-out infinite;
+      margin-bottom: 10px;
+    }
+    .skeleton-line.short { width: 55%; }
+    .skeleton-line.medium { width: 80%; }
+    .skeleton-line.long { width: 100%; }
+    .skeleton-line.title { height: 18px; margin-bottom: 14px; }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 0.7; }
+    }
+
+    /* ─── BLOG CARD ─── */
+    .blog-card {
+      background: #fff;
+      border-radius: 2px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(11,46,43,.10);
+    }
+    .card-image-wrap {
+      width: 100%;
+      aspect-ratio: 3/2;
+      overflow: hidden;
+      position: relative;
+      background: var(--greige);
+      flex-shrink: 0;
+    }
+    .card-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
     .blog-card:hover .card-image-wrap img { transform: scale(1.04); }
-    .card-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--greige); color: var(--faint); font-size: 28px; }
-    .card-body { padding: 20px 22px 26px; display: flex; flex-direction: column; flex: 1; }
-    .card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-    .card-tag { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); }
-    .card-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--faint); flex-shrink: 0; }
-    .card-date { font-family: var(--sans); font-size: 11px; color: var(--muted); font-weight: 400; }
-    .card-title { font-family: var(--serif); font-size: 20px; font-weight: 400; line-height: 1.35; color: var(--ink); margin-bottom: 12px; transition: color 0.2s; }
+    .card-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--greige);
+      color: var(--faint);
+      font-size: 28px;
+    }
+    .card-body {
+      padding: 20px 22px 26px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .card-tag {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+    .card-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--faint);
+      flex-shrink: 0;
+    }
+    .card-date {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .card-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--ink);
+      margin-bottom: 12px;
+      transition: color 0.2s;
+    }
     .blog-card:hover .card-title { color: var(--teal); }
-    .card-excerpt { font-family: var(--sans); font-size: 14.5px; color: var(--muted); line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex: 1; margin-bottom: 18px; }
-    .card-read-more { font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); text-decoration: underline; text-underline-offset: 3px; align-self: flex-start; }
-    .load-more-wrap { text-align: center; margin-top: 56px; }
-    .btn-load-more { display: inline-block; background: var(--teal); color: #fff; font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 16px 44px; border-radius: 2px; transition: background 0.2s, transform 0.2s; cursor: pointer; border: none; }
+    .card-excerpt {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.65;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+      margin-bottom: 18px;
+    }
+    .card-read-more {
+      font-family: var(--sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      align-self: flex-start;
+    }
+
+    /* ─── LOAD MORE ─── */
+    .load-more-wrap {
+      text-align: center;
+      margin-top: 56px;
+    }
+    .btn-load-more {
+      display: inline-block;
+      background: var(--teal);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 16px 44px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+      cursor: pointer;
+      border: none;
+    }
     .btn-load-more:hover { background: var(--ink); transform: translateY(-2px); }
     .btn-load-more:disabled { background: var(--faint); cursor: default; transform: none; }
     .btn-load-more.hidden { display: none; }
-    .blog-error { text-align: center; padding: 60px 20px; display: none; }
+
+    /* ─── ERROR STATE ─── */
+    .blog-error {
+      text-align: center;
+      padding: 60px 20px;
+      display: none;
+    }
     .blog-error.visible { display: block; }
-    .blog-error p { font-family: var(--sans); font-size: 16px; color: var(--muted); margin-bottom: 20px; }
-    .newsletter-section { background: var(--greige); padding: 100px 60px; }
-    .newsletter-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1100px; margin: 0 auto; align-items: center; }
+    .blog-error p {
+      font-family: var(--sans);
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* ─── NEWSLETTER ─── */
+    .newsletter-section {
+      background: var(--greige);
+      padding: 100px 60px;
+    }
+    .newsletter-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
     .newsletter-left .overline { justify-content: flex-start; }
-    .newsletter-left h2 { font-family: var(--serif); font-size: 40px; font-weight: 400; line-height: 1.2; color: var(--ink); margin-bottom: 20px; }
-    .newsletter-left p { font-family: var(--sans); font-size: 16px; color: var(--warm); line-height: 1.7; max-width: 420px; }
+    .newsletter-left h2 {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .newsletter-left p {
+      font-family: var(--sans);
+      font-size: 16px;
+      color: var(--warm);
+      line-height: 1.7;
+      max-width: 420px;
+    }
     .newsletter-form { display: flex; flex-direction: column; gap: 14px; }
-    .newsletter-form input { width: 100%; background: #fff; border: 1px solid var(--greige); border-radius: 2px; padding: 16px 18px; font-family: var(--sans); font-size: 14px; color: var(--ink); outline: none; transition: border-color 0.2s; }
+    .newsletter-form input {
+      width: 100%;
+      background: #fff;
+      border: 1px solid var(--greige);
+      border-radius: 2px;
+      padding: 16px 18px;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+    }
     .newsletter-form input::placeholder { color: var(--faint); }
     .newsletter-form input:focus { border-color: var(--teal); }
-    .newsletter-form button { background: var(--teal); color: #fff; font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 16px 24px; border-radius: 2px; border: none; cursor: pointer; transition: background 0.2s; }
+    .newsletter-form button {
+      background: var(--teal);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 16px 24px;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
     .newsletter-form button:hover { background: var(--ink); }
-    .newsletter-msg { font-family: var(--sans); font-size: 13px; padding: 10px 0; min-height: 20px; }
-    .newsletter-msg.success { color: var(--teal); } .newsletter-msg.error { color: #c0392b; }
-    .footer { background: var(--footer); color: rgba(246,244,239,.55); padding: 72px 60px 40px; }
-    .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid rgba(246,244,239,.1); max-width: 1180px; margin: 0 auto; }
-    .footer-brand-name { font-family: var(--serif); font-size: 20px; color: var(--paper); font-weight: 700; margin-bottom: 14px; }
-    .footer-brand-tagline { font-size: 13px; line-height: 1.7; margin-bottom: 28px; max-width: 260px; }
-    .footer-social { display: flex; gap: 14px; flex-wrap: wrap; }
-    .footer-social a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(246,244,239,.2); border-radius: 50%; color: rgba(246,244,239,.7); transition: border-color 0.2s, color 0.2s, background 0.2s; }
-    .footer-social a:hover { border-color: var(--turq); color: var(--turq); background: rgba(82,212,200,.08); }
+    .newsletter-msg {
+      font-family: var(--sans);
+      font-size: 13px;
+      padding: 10px 0;
+      min-height: 20px;
+    }
+    .newsletter-msg.success { color: var(--teal); }
+    .newsletter-msg.error   { color: #c0392b; }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: var(--footer);
+      color: rgba(246,244,239,.55);
+      padding: 72px 60px 40px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(246,244,239,.1);
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .footer-brand-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--paper);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .footer-brand-tagline {
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 260px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(246,244,239,.2);
+      border-radius: 50%;
+      color: rgba(246,244,239,.7);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .footer-social a:hover {
+      border-color: var(--turq);
+      color: var(--turq);
+      background: rgba(82,212,200,.08);
+    }
     .footer-social svg { width: 15px; height: 15px; fill: currentColor; }
-    .footer-col-title { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--paper); margin-bottom: 20px; }
+    .footer-col-title {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--paper);
+      margin-bottom: 20px;
+    }
     .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
-    .footer-col ul a { font-size: 13px; color: rgba(246,244,239,.55); transition: color 0.2s; }
+    .footer-col ul a {
+      font-size: 13px;
+      color: rgba(246,244,239,.55);
+      transition: color 0.2s;
+    }
     .footer-col ul a:hover { color: var(--turq); }
-    .footer-bottom { max-width: 1180px; margin: 32px auto 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom {
+      max-width: 1180px;
+      margin: 32px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
     .footer-copy { font-size: 12px; }
     .footer-bottom-links { display: flex; gap: 24px; }
     .footer-bottom-links a { font-size: 12px; color: rgba(246,244,239,.4); transition: color 0.2s; }
     .footer-bottom-links a:hover { color: var(--turq); }
-    @media (max-width: 960px) { .nav { padding: 0 32px; } .nav-links { display: none; } .hamburger { display: flex; } .blog-hero { padding: 140px 40px 70px; } .blog-hero h1 { font-size: 42px; } .blog-grid-section { padding: 70px 40px; } .blog-grid, .skeleton-grid { grid-template-columns: repeat(2, 1fr); } .newsletter-section { padding: 80px 40px; } .newsletter-inner { grid-template-columns: 1fr; gap: 48px; } .footer { padding: 60px 40px 36px; } .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; } }
-    @media (max-width: 640px) { .nav { padding: 0 24px; height: 64px; } .nav-mobile-menu { top: 64px; padding: 20px 24px 28px; } .blog-hero { padding: 110px 24px 56px; } .blog-hero h1 { font-size: 36px; } .blog-hero-sub { font-size: 16px; } .blog-grid-section { padding: 56px 24px; } .blog-grid, .skeleton-grid { grid-template-columns: 1fr; gap: 28px; } .newsletter-section { padding: 64px 24px; } .newsletter-left h2 { font-size: 32px; } .footer { padding: 48px 24px 32px; } .footer-top { grid-template-columns: 1fr; gap: 32px; } .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; } }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .blog-grid, .skeleton-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px 24px;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .nav { padding: 0 32px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .blog-hero { padding: 140px 40px 70px; }
+      .blog-hero h1 { font-size: 42px; }
+      .blog-grid-section { padding: 70px 40px; }
+      .blog-grid, .skeleton-grid { grid-template-columns: repeat(2, 1fr); }
+      .newsletter-section { padding: 80px 40px; }
+      .newsletter-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer { padding: 60px 40px 36px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 0 24px; height: 64px; }
+      .nav-mobile-menu { top: 64px; padding: 20px 24px 28px; }
+      .blog-hero { padding: 110px 24px 56px; }
+      .blog-hero h1 { font-size: 36px; }
+      .blog-hero-sub { font-size: 16px; }
+      .blog-grid-section { padding: 56px 24px; }
+      .blog-grid, .skeleton-grid { grid-template-columns: 1fr; gap: 28px; }
+      .newsletter-section { padding: 64px 24px; }
+      .newsletter-left h2 { font-size: 32px; }
+      .footer { padding: 48px 24px 32px; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-logo">Dejah White</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li class="nav-alt"><a href="home2.html">Home &#9670;</a></li>
+      <li class="nav-alt"><a href="home2.html">Home ◆</a></li>
       <li><a href="about.html">About</a></li>
       <li class="active"><a href="blog.html">Blog</a></li>
       <li><a href="travel.html">Travel</a></li>
       <li class="soon">Shop <span class="soon-badge">Soon</span></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
   <div class="nav-mobile-menu" id="mobile-menu">
     <a href="index.html">Home</a>
-    <a href="home2.html" class="mobile-alt">Home &#9670;</a>
+    <a href="home2.html" class="mobile-alt">Home ◆</a>
     <a href="about.html">About</a>
     <a href="blog.html">Blog</a>
     <a href="travel.html">Travel</a>
     <a href="contact.html">Contact</a>
   </div>
+
+  <!-- PAGE HERO -->
   <section class="blog-hero">
-    <div class="overline"><span class="overline-rule"></span><span class="overline-text">From the Journal</span><span class="overline-rule"></span></div>
+    <div class="overline">
+      <span class="overline-rule"></span>
+      <span class="overline-text">From the Journal</span>
+      <span class="overline-rule"></span>
+    </div>
     <h1>Writing for women building with purpose.</h1>
     <p class="blog-hero-sub">Faith, family, legacy, and the everyday work of intentional living.</p>
   </section>
+
+  <!-- BLOG GRID -->
   <section class="blog-grid-section">
+
+    <!-- Skeleton (visible until posts load) -->
     <div class="skeleton-grid" id="skeleton-grid">
       <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line title medium"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div><div class="skeleton-line short" style="margin-top:6px"></div></div></div>
       <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line title medium"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div><div class="skeleton-line short" style="margin-top:6px"></div></div></div>
       <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line title medium"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div><div class="skeleton-line short" style="margin-top:6px"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line title medium"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div><div class="skeleton-line short" style="margin-top:6px"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line title medium"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div><div class="skeleton-line short" style="margin-top:6px"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line title medium"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div><div class="skeleton-line short" style="margin-top:6px"></div></div></div>
     </div>
+
+    <!-- Real posts go here -->
     <div class="blog-grid" id="blog-grid" style="display:none"></div>
-    <div class="blog-error" id="blog-error"><p>We had trouble loading posts. Please refresh to try again.</p></div>
-    <div class="load-more-wrap"><button class="btn-load-more hidden" id="load-more-btn">Load More Posts</button></div>
+
+    <!-- Error state -->
+    <div class="blog-error" id="blog-error">
+      <p>We had trouble loading posts. Please refresh to try again.</p>
+    </div>
+
+    <!-- Load More -->
+    <div class="load-more-wrap">
+      <button class="btn-load-more hidden" id="load-more-btn">Load More Posts</button>
+    </div>
+
   </section>
+
+  <!-- NEWSLETTER -->
   <section class="newsletter-section">
     <div class="newsletter-inner">
       <div class="newsletter-left">
-        <div class="overline" style="justify-content:flex-start; margin-bottom:20px;"><span class="overline-rule"></span><span class="overline-text">Stay Connected</span></div>
+        <div class="overline" style="justify-content:flex-start; margin-bottom:20px;">
+          <span class="overline-rule"></span>
+          <span class="overline-text">Stay Connected</span>
+        </div>
         <h2>Come along for the journey.</h2>
-        <p>Join the community of women living with intention. Get new posts, travel diaries, and resources delivered straight to your inbox.</p>
+        <p>Join the community of women living with intention. Get new posts, travel diaries, and resources delivered straight to your inbox — no fluff, just the good stuff.</p>
       </div>
       <div class="newsletter-right">
         <form class="newsletter-form" id="newsletter-form" novalidate>
-          <input type="text" id="nl-name" name="name" placeholder="Your first name" autocomplete="given-name" required />
+          <input type="text"  id="nl-name"  name="name"  placeholder="Your first name" autocomplete="given-name" required />
           <input type="email" id="nl-email" name="email" placeholder="Your email address" autocomplete="email" required />
           <button type="submit" id="nl-submit">Join the Journey</button>
           <div class="newsletter-msg" id="nl-msg"></div>
@@ -162,99 +651,362 @@
       </div>
     </div>
   </section>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-top">
       <div class="footer-brand">
         <div class="footer-brand-name">Dejah White</div>
         <div class="footer-brand-tagline">Faith. Family. Legacy. Intentional living for women building something that lasts.</div>
         <div class="footer-social">
-          <a href="https://www.instagram.com/dejahwhitetravel" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-          <a href="https://www.facebook.com/dejahwhitetravel" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-          <a href="https://www.tiktok.com/@thedejahwhite" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
-          <a href="https://www.youtube.com/dejahshardae" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
-          <a href="mailto:dejahwhitetravel@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/dejahwhitetravel" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/dejahwhitetravel" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <!-- TikTok -->
+          <a href="https://www.tiktok.com/@thedejahwhite" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/dejahshardae" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+          <!-- Email -->
+          <a href="mailto:dejahwhitetravel@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
         </div>
       </div>
-      <div class="footer-col"><div class="footer-col-title">Navigate</div><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="blog.html">Blog</a></li><li><a href="travel.html">Travel</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div class="footer-col"><div class="footer-col-title">Categories</div><ul><li><a href="blog.html?cat=family">Family &amp; Legacy</a></li><li><a href="blog.html?cat=lifestyle">Lifestyle &amp; Growth</a></li><li><a href="blog.html?cat=entrepreneurship">Entrepreneurship</a></li><li><a href="blog.html?cat=travel">Travel</a></li></ul></div>
-      <div class="footer-col"><div class="footer-col-title">Connect</div><ul><li><a href="mailto:dejahwhitetravel@gmail.com">Email Dejah</a></li><li><a href="https://www.instagram.com/dejahwhitetravel" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.tiktok.com/@thedejahwhite" target="_blank" rel="noopener">TikTok</a></li><li><a href="https://www.youtube.com/dejahshardae" target="_blank" rel="noopener">YouTube</a></li></ul></div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Navigate</div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="travel.html">Travel</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Categories</div>
+        <ul>
+          <li><a href="blog.html?cat=family">Family &amp; Legacy</a></li>
+          <li><a href="blog.html?cat=lifestyle">Lifestyle &amp; Growth</a></li>
+          <li><a href="blog.html?cat=entrepreneurship">Entrepreneurship</a></li>
+          <li><a href="blog.html?cat=travel">Travel</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Connect</div>
+        <ul>
+          <li><a href="mailto:dejahwhitetravel@gmail.com">Email Dejah</a></li>
+          <li><a href="https://www.instagram.com/dejahwhitetravel" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@thedejahwhite" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="https://www.youtube.com/dejahshardae" target="_blank" rel="noopener">YouTube</a></li>
+        </ul>
+      </div>
     </div>
+
     <div class="footer-bottom">
       <div class="footer-copy">&copy; <span id="footer-year"></span> Dejah White. All rights reserved.</div>
-      <div class="footer-bottom-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
     </div>
   </footer>
+
+  <!-- JAVASCRIPT -->
   <script>
+    /* ─── NAV ─── */
     (function () {
-      var nav = document.getElementById('nav'), hamburger = document.getElementById('hamburger'), menu = document.getElementById('mobile-menu');
-      window.addEventListener('scroll', function () { nav.classList.toggle('scrolled', window.scrollY > 10); });
-      hamburger.addEventListener('click', function () { var open = menu.classList.toggle('open'); hamburger.classList.toggle('open', open); hamburger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
-      document.addEventListener('click', function (e) { if (!nav.contains(e.target) && !menu.contains(e.target)) { menu.classList.remove('open'); hamburger.classList.remove('open'); } });
+      var nav       = document.getElementById('nav');
+      var hamburger = document.getElementById('hamburger');
+      var menu      = document.getElementById('mobile-menu');
+
+      window.addEventListener('scroll', function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      });
+
+      hamburger.addEventListener('click', function () {
+        var open = menu.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!nav.contains(e.target) && !menu.contains(e.target)) {
+          menu.classList.remove('open');
+          hamburger.classList.remove('open');
+        }
+      });
     })();
+
+    /* ─── FOOTER YEAR ─── */
     document.getElementById('footer-year').textContent = new Date().getFullYear();
-    var WIX_CLIENT_ID = '897cba15-c5fb-4204-a89b-81bbca8b6f4e', WIX_SITE_ID = 'ee0295b0-5a24-47cd-8610-58c1b5e46882';
-    var _tokenCache = null;
+
+    /* ─── WIX CONFIG ─── */
+    var WIX_CLIENT_ID = '897cba15-c5fb-4204-a89b-81bbca8b6f4e';
+    var WIX_SITE_ID   = 'ee0295b0-5a24-47cd-8610-58c1b5e46882';
+
+    var _tokenCache = null; // { access_token, expires_at }
+
     function getVisitorToken() {
       var now = Date.now();
-      if (_tokenCache && _tokenCache.expires_at > now + 30000) return Promise.resolve(_tokenCache.access_token);
-      return fetch('https://www.wixapis.com/oauth2/token', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ clientId: WIX_CLIENT_ID, grantType: 'anonymous' }) })
-      .then(function (res) { if (!res.ok) throw new Error('Token fetch failed: ' + res.status); return res.json(); })
-      .then(function (data) { var expiresIn = (data.expires_in || 3600) * 1000; _tokenCache = { access_token: data.access_token, expires_at: now + expiresIn }; return _tokenCache.access_token; });
+      if (_tokenCache && _tokenCache.expires_at > now + 30000) {
+        return Promise.resolve(_tokenCache.access_token);
+      }
+      return fetch('https://www.wixapis.com/oauth2/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clientId: WIX_CLIENT_ID, grantType: 'anonymous' })
+      })
+      .then(function (res) {
+        if (!res.ok) throw new Error('Token fetch failed: ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        var expiresIn = (data.expires_in || 3600) * 1000;
+        _tokenCache = {
+          access_token: data.access_token,
+          expires_at:   now + expiresIn
+        };
+        return _tokenCache.access_token;
+      });
     }
+
     function wixRequest(url, options) {
       return getVisitorToken().then(function (token) {
         var opts = options || {};
-        opts.headers = Object.assign({}, opts.headers || {}, { 'Authorization': 'Bearer ' + token, 'wix-site-id': WIX_SITE_ID, 'Content-Type': 'application/json' });
+        opts.headers = Object.assign({}, opts.headers || {}, {
+          'Authorization': 'Bearer ' + token,
+          'wix-site-id':   WIX_SITE_ID,
+          'Content-Type':  'application/json'
+        });
         return fetch(url, opts);
       });
     }
-    var currentOffset = 0, LIMIT = 12, isLoading = false, totalPosts = 0;
-    var skeletonGrid = document.getElementById('skeleton-grid'), blogGrid = document.getElementById('blog-grid'), blogError = document.getElementById('blog-error'), loadMoreBtn = document.getElementById('load-more-btn');
-    function fmtDate(iso) { if (!iso) return ''; try { return new Date(iso).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }); } catch (e) { return ''; } }
-    function getImageUrl(post) { try { var raw = post.media && post.media.wixMedia && post.media.wixMedia.image && post.media.wixMedia.image.url; if (!raw) return null; return raw + '/v1/fill/w_600,h_400,al_c,q_80/file.jpg'; } catch (e) { return null; } }
-    function getCategory(post) { if (post.tags && post.tags.length > 0) { return post.tags[0].label || post.tags[0]; } return 'Journal'; }
+
+    /* ─── BLOG POSTS ─── */
+    var currentOffset = 0;
+    var LIMIT         = 12;
+    var isLoading     = false;
+    var totalPosts    = 0;
+
+    var skeletonGrid  = document.getElementById('skeleton-grid');
+    var blogGrid      = document.getElementById('blog-grid');
+    var blogError     = document.getElementById('blog-error');
+    var loadMoreBtn   = document.getElementById('load-more-btn');
+
+    function fmtDate(iso) {
+      if (!iso) return '';
+      try {
+        return new Date(iso).toLocaleDateString('en-US', {
+          month: 'long', day: 'numeric', year: 'numeric'
+        });
+      } catch (e) {
+        return '';
+      }
+    }
+
+    function getImageUrl(post) {
+      try {
+        var raw = post.media && post.media.wixMedia && post.media.wixMedia.image && post.media.wixMedia.image.url;
+        if (!raw) return null;
+        // Wix media URL construction
+        return raw + '/v1/fill/w_600,h_400,al_c,q_80/file.jpg';
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function getCategory(post) {
+      if (post.hashtags && post.hashtags.length > 0) {
+        return post.hashtags[0];
+      }
+      return 'Journal';
+    }
+
     function buildCard(post) {
-      var imageUrl = getImageUrl(post), slug = post.slug || post.id || '', href = 'blog-post.html?slug=' + encodeURIComponent(slug), cat = getCategory(post), date = fmtDate(post.firstPublishedDate), title = post.title || 'Untitled', excerpt = post.excerpt || '';
-      var imgHtml = imageUrl ? '<img src="' + imageUrl + '" alt="' + title.replace(/"/g, '&quot;') + '" loading="lazy" />' : '<div class="card-placeholder">&#9670;</div>';
-      return '<a href="' + href + '" class="blog-card"><div class="card-image-wrap">' + imgHtml + '</div><div class="card-body"><div class="card-meta"><span class="card-tag">' + cat + '</span><span class="card-dot"></span><span class="card-date">' + date + '</span></div><h2 class="card-title">' + title + '</h2>' + (excerpt ? '<p class="card-excerpt">' + excerpt + '</p>' : '') + '<span class="card-read-more">Read More &rarr;</span></div></a>';
+      var imageUrl = getImageUrl(post);
+      var slug     = post.slug || post.id || '';
+      var href     = 'blog-post.html?slug=' + encodeURIComponent(slug);
+      var cat      = getCategory(post);
+      var date     = fmtDate(post.firstPublishedDate);
+      var title    = post.title || 'Untitled';
+      var excerpt  = post.excerpt || '';
+
+      var imgHtml = imageUrl
+        ? '<img src="' + imageUrl + '" alt="' + title.replace(/"/g, '&quot;') + '" loading="lazy" />'
+        : '<div class="card-placeholder">&#9670;</div>';
+
+      return '<a href="' + href + '" class="blog-card">'
+        + '<div class="card-image-wrap">' + imgHtml + '</div>'
+        + '<div class="card-body">'
+        +   '<div class="card-meta">'
+        +     '<span class="card-tag">' + cat + '</span>'
+        +     '<span class="card-dot"></span>'
+        +     '<span class="card-date">' + date + '</span>'
+        +   '</div>'
+        +   '<h2 class="card-title">' + title + '</h2>'
+        +   (excerpt ? '<p class="card-excerpt">' + excerpt + '</p>' : '')
+        +   '<span class="card-read-more">Read More &rarr;</span>'
+        + '</div>'
+        + '</a>';
     }
-    function updateLoadMoreButton() { if (currentOffset >= totalPosts) { loadMoreBtn.classList.add('hidden'); } else { loadMoreBtn.classList.remove('hidden'); loadMoreBtn.disabled = false; loadMoreBtn.textContent = 'Load More Posts'; } }
+
+    function updateLoadMoreButton() {
+      if (currentOffset >= totalPosts) {
+        loadMoreBtn.classList.add('hidden');
+      } else {
+        loadMoreBtn.classList.remove('hidden');
+        loadMoreBtn.disabled = false;
+        loadMoreBtn.textContent = 'Load More Posts';
+      }
+    }
+
     function loadPosts(append) {
-      if (isLoading) return; isLoading = true;
-      if (!append) { skeletonGrid.style.display = 'grid'; blogGrid.style.display = 'none'; blogError.classList.remove('visible'); blogGrid.innerHTML = ''; }
-      else { loadMoreBtn.disabled = true; loadMoreBtn.textContent = 'Loading…'; }
-      wixRequest('https://www.wixapis.com/blog/v3/posts?paging.limit=' + LIMIT + '&paging.offset=' + currentOffset)
-      .then(function (res) { if (!res.ok) throw new Error('API error: ' + res.status); return res.json(); })
-      .then(function (data) {
-        var posts = data.posts || []; totalPosts = (data.metaData && data.metaData.total) ? data.metaData.total : posts.length; currentOffset += posts.length;
-        if (!append) { skeletonGrid.style.display = 'none'; blogGrid.style.display = 'grid'; }
-        if (posts.length === 0 && !append) { blogError.classList.add('visible'); blogError.querySelector('p').textContent = 'No posts found yet. Check back soon.'; }
-        else { var html = posts.map(buildCard).join(''); if (append) { blogGrid.insertAdjacentHTML('beforeend', html); } else { blogGrid.innerHTML = html; } }
-        updateLoadMoreButton(); isLoading = false;
-      }).catch(function (err) {
-        if (!append) { skeletonGrid.style.display = 'none'; blogGrid.style.display = 'none'; blogError.classList.add('visible'); }
-        else { loadMoreBtn.disabled = false; loadMoreBtn.textContent = 'Load More Posts'; }
-        isLoading = false;
-      });
+      if (isLoading) return;
+      isLoading = true;
+
+      if (!append) {
+        // Initial load: skeleton visible, grid hidden
+        skeletonGrid.style.display = 'grid';
+        blogGrid.style.display = 'none';
+        blogError.classList.remove('visible');
+        blogGrid.innerHTML = '';
+      } else {
+        // Appending: disable button
+        loadMoreBtn.disabled = true;
+        loadMoreBtn.textContent = 'Loading…';
+      }
+
+      wixRequest('https://www.wixapis.com/blog/v3/posts/query', {
+        method: 'POST',
+        body: JSON.stringify({ paging: { limit: LIMIT, offset: currentOffset } })
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('API error: ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          var posts = data.posts || [];
+          totalPosts = (data.metaData && data.metaData.total) ? data.metaData.total : posts.length;
+          currentOffset += posts.length;
+
+          if (!append) {
+            // Hide skeleton, show grid
+            skeletonGrid.style.display = 'none';
+            blogGrid.style.display = 'grid';
+          }
+
+          if (posts.length === 0 && !append) {
+            blogError.classList.add('visible');
+            blogError.querySelector('p').textContent = 'No posts found yet. Check back soon.';
+          } else {
+            var html = posts.map(buildCard).join('');
+            if (append) {
+              blogGrid.insertAdjacentHTML('beforeend', html);
+            } else {
+              blogGrid.innerHTML = html;
+            }
+          }
+
+          updateLoadMoreButton();
+          isLoading = false;
+        })
+        .catch(function (err) {
+          console.error('Blog load error:', err);
+          if (!append) {
+            skeletonGrid.style.display = 'none';
+            blogGrid.style.display = 'none';
+            blogError.classList.add('visible');
+          } else {
+            loadMoreBtn.disabled = false;
+            loadMoreBtn.textContent = 'Load More Posts';
+          }
+          isLoading = false;
+        });
     }
-    loadMoreBtn.addEventListener('click', function () { loadPosts(true); });
+
+    loadMoreBtn.addEventListener('click', function () {
+      loadPosts(true);
+    });
+
+    // Kick off initial load
     loadPosts(false);
+
+    /* ─── NEWSLETTER ─── */
     (function () {
-      var form = document.getElementById('newsletter-form'), nameEl = document.getElementById('nl-name'), emailEl = document.getElementById('nl-email'), submitBtn = document.getElementById('nl-submit'), msgEl = document.getElementById('nl-msg');
-      function showMsg(text, type) { msgEl.textContent = text; msgEl.className = 'newsletter-msg ' + (type || ''); }
+      var form    = document.getElementById('newsletter-form');
+      var nameEl  = document.getElementById('nl-name');
+      var emailEl = document.getElementById('nl-email');
+      var submitBtn = document.getElementById('nl-submit');
+      var msgEl   = document.getElementById('nl-msg');
+
+      function showMsg(text, type) {
+        msgEl.textContent = text;
+        msgEl.className = 'newsletter-msg ' + (type || '');
+      }
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-        var name = (nameEl.value || '').trim(), email = (emailEl.value || '').trim();
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showMsg('Please enter a valid email address.', 'error'); emailEl.focus(); return; }
-        submitBtn.disabled = true; submitBtn.textContent = 'Joining…'; showMsg('', '');
-        var nameParts = name.split(' '), firstName = nameParts[0] || '', lastName = nameParts.slice(1).join(' ') || '';
-        wixRequest('https://www.wixapis.com/contacts/v4/contacts', { method: 'POST', body: JSON.stringify({ info: { name: { first: firstName, last: lastName }, emails: { items: [{ tag: 'MAIN', email: email }] } }, allowDuplicates: false }) })
-        .then(function (res) { if (!res.ok) return res.json().then(function (d) { throw d; }); return res.json(); })
-        .then(function () { showMsg("You're in! Welcome to the journey.", 'success'); nameEl.value = ''; emailEl.value = ''; submitBtn.disabled = false; submitBtn.textContent = 'Join the Journey'; })
+        var name  = (nameEl.value || '').trim();
+        var email = (emailEl.value || '').trim();
+
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          showMsg('Please enter a valid email address.', 'error');
+          emailEl.focus();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Joining…';
+        showMsg('', '');
+
+        var nameParts = name.split(' ');
+        var firstName = nameParts[0] || '';
+        var lastName  = nameParts.slice(1).join(' ') || '';
+
+        var payload = {
+          info: {
+            name: { first: firstName, last: lastName },
+            emails: { items: [{ tag: 'MAIN', email: email }] }
+          },
+          allowDuplicates: false
+        };
+
+        wixRequest('https://www.wixapis.com/contacts/v4/contacts', {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        })
+        .then(function (res) {
+          if (!res.ok) return res.json().then(function (d) { throw d; });
+          return res.json();
+        })
+        .then(function () {
+          showMsg('You\'re in! Welcome to the journey.', 'success');
+          nameEl.value  = '';
+          emailEl.value = '';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Join the Journey';
+        })
         .catch(function (err) {
+          console.error('Newsletter error:', err);
           var msg = 'Something went wrong. Please try again.';
-          if (err && err.message && err.message.toLowerCase().indexOf('duplicate') > -1) { msg = "You're already on the list!"; }
-          showMsg(msg, 'error'); submitBtn.disabled = false; submitBtn.textContent = 'Join the Journey';
+          if (err && err.message && err.message.toLowerCase().indexOf('duplicate') > -1) {
+            msg = 'You\'re already on the list!';
+          }
+          showMsg(msg, 'error');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Join the Journey';
         });
       });
     })();
