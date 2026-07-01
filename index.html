@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Dejah White — sharing the journey of becoming. A faith-rooted space for women and families building intentional lives.">
-<title>Dejah White &mdash; Sharing the Journey of Becoming</title>
+<meta name="description" content="Dejah White — faith, family, lifestyle & legacy. Sharing the journey of becoming, and building a travel business with intention.">
+<title>Dejah | Lifestyle &amp; Legacy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -22,34 +22,30 @@
   --serif:  'Libre Baskerville', Georgia, serif;
   --sans:   'Lato', -apple-system, sans-serif;
 }
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body { font-family: var(--sans); background: var(--paper); color: var(--ink); }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 
+.overline { display: flex; align-items: center; gap: 14px; }
+.overline .rule { width: 30px; height: 2px; background: var(--turq); flex-shrink: 0; }
+.overline span { font-family: var(--sans); font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
+
 /* NAV */
-.nav { display: flex; align-items: center; justify-content: space-between; padding: 30px 70px; border-bottom: 1px solid rgba(11,46,43,0.1); background: var(--paper); position: sticky; top: 0; z-index: 100; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 26px 70px; border-bottom: 1px solid rgba(11,46,43,0.1); background: var(--paper); position: sticky; top: 0; z-index: 100; }
 .nav-logo { font-family: var(--serif); font-weight: 700; font-size: 18px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
-.nav-links { display: flex; align-items: center; gap: 38px; list-style: none; }
+.nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
 .nav-links a { font-family: var(--sans); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #4a564f; font-weight: 400; padding-top: 4px; transition: color 0.15s; }
 .nav-links a:hover { color: var(--ink); }
 .nav-links .active a { color: var(--ink); font-weight: 700; border-top: 2px solid var(--turq); }
-.nav-links .nav-alt a { color: var(--teal); font-weight: 700; font-size: 11px; }
-.nav-links .nav-alt.active a { border-top: 2px solid var(--turq); }
-.nav-links .soon { color: var(--faint); display: flex; align-items: center; gap: 7px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 400; }
-.nav-links .soon-badge { font-size: 8px; letter-spacing: 0.12em; color: var(--teal); border: 1px solid rgba(19,122,111,0.4); border-radius: 3px; padding: 2px 5px; }
-
+.nav-links .soon { color: var(--faint); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; }
 .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; background: none; border: none; padding: 4px; }
-.hamburger span { display: block; }
-.hamburger span:nth-child(1), .hamburger span:nth-child(2) { width: 22px; height: 1.5px; background: var(--ink); }
-.hamburger span:nth-child(3) { width: 14px; height: 1.5px; background: var(--turq); }
+.hamburger span:nth-child(1), .hamburger span:nth-child(2) { width: 22px; height: 1.5px; background: var(--ink); display: block; }
+.hamburger span:nth-child(3) { width: 14px; height: 1.5px; background: var(--turq); display: block; }
 .nav-mobile-menu { display: none; flex-direction: column; background: var(--paper); border-bottom: 1px solid rgba(11,46,43,0.1); padding: 16px 24px 24px; gap: 18px; }
 .nav-mobile-menu a { font-family: var(--sans); font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); font-weight: 700; }
-.nav-mobile-menu .mobile-alt { color: var(--teal); font-size: 12px; }
-
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .nav { padding: 18px 24px; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
@@ -57,209 +53,110 @@ img { display: block; max-width: 100%; }
 }
 
 /* HERO */
-.hero { background: var(--paper); padding: 96px 70px 80px; text-align: center; }
-.hero-inner { max-width: 760px; margin: 0 auto; }
-.hero-tagline { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 30px; }
-.hero-tagline .rule { width: 30px; height: 2px; background: var(--turq); display: block; flex-shrink: 0; }
+.hero { background: var(--paper); padding: 88px 70px 0; text-align: center; }
+.hero-tagline { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 30px; }
+.hero-tagline .rule { width: 34px; height: 2px; background: var(--turq); display: block; }
 .hero-tagline span { font-family: var(--sans); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
-.hero h1 { font-family: var(--serif); font-weight: 700; font-size: 62px; line-height: 1.12; letter-spacing: -0.01em; color: var(--ink); }
+.hero h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(40px, 5.4vw, 66px); line-height: 1.1; letter-spacing: -0.01em; color: var(--ink); max-width: 820px; margin: 0 auto; }
 .hero h1 em { font-style: italic; font-weight: 400; }
-.hero-sub { font-family: var(--sans); font-size: 18.5px; line-height: 1.66; color: var(--warm); margin: 28px auto 0; max-width: 520px; }
-.hero-ctas { display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 36px; flex-wrap: wrap; }
+.hero-sub { font-family: var(--sans); font-size: clamp(16px, 2vw, 19px); line-height: 1.66; color: var(--warm); margin: 28px auto 0; max-width: 560px; }
+.hero-ctas { display: flex; align-items: center; justify-content: center; gap: 26px; margin-top: 36px; flex-wrap: wrap; }
 .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--teal); color: var(--paper); font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; padding: 16px 32px; border-radius: 4px; transition: background 0.2s; }
 .btn-primary:hover { background: #0f6560; }
 .btn-primary .arrow { color: var(--turq); }
 .btn-text { font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); border-bottom: 1px solid rgba(19,122,111,0.35); padding-bottom: 3px; transition: border-color 0.2s; }
 .btn-text:hover { border-color: var(--teal); }
-.hero-banner { margin-top: 64px; aspect-ratio: 21/8; overflow: hidden; }
+.hero-banner { margin-top: 60px; aspect-ratio: 21/8; max-height: 420px; overflow: hidden; }
 .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
-
-@media (max-width: 1024px) {
-  .hero h1 { font-size: clamp(42px, 5.5vw, 62px); }
-}
 @media (max-width: 768px) {
-  .hero { padding: 42px 24px 36px; }
-  .hero h1 { font-size: 36px; line-height: 1.16; }
-  .hero-sub { font-size: 15.5px; line-height: 1.62; max-width: 300px; margin-top: 18px; }
-  .hero-tagline span { font-size: 10px; }
-  .hero-tagline .rule { width: 22px; }
-  .hero-banner { aspect-ratio: 16/11; margin-top: 28px; }
-  .btn-text { display: none; }
-  .btn-primary { font-size: 12px; padding: 14px 26px; margin-top: 24px; }
-  .hero-ctas { margin-top: 0; }
+  .hero { padding: 48px 24px 0; }
+  .hero-banner { aspect-ratio: 16/10; margin-top: 34px; }
+  .hero-tagline span { font-size: 10px; letter-spacing: 0.22em; }
 }
 
-/* INTRO */
-.intro { background: var(--greige); padding: 92px 70px; }
-.intro-inner { max-width: 1180px; margin: 0 auto; }
-.intro-grid { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 74px; align-items: center; }
-.intro-photo { aspect-ratio: 1/1; overflow: hidden; }
+/* ABOUT / INTRO */
+.intro { background: var(--greige); padding: 96px 70px; }
+.intro-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 70px; align-items: center; }
+.intro-photo { aspect-ratio: 4/5; overflow: hidden; background: var(--paper); }
 .intro-photo img { width: 100%; height: 100%; object-fit: cover; }
-.intro-text .overline { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
-.intro-text .overline .rule { width: 30px; height: 2px; background: var(--turq); flex-shrink: 0; }
-.intro-text .overline span { font-family: var(--sans); font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
-.intro-text h2 { font-family: var(--serif); font-weight: 700; font-size: 38px; line-height: 1.16; color: var(--ink); }
-.intro-text p { font-family: var(--sans); font-size: 18px; line-height: 1.72; color: #4f483d; margin-top: 24px; max-width: 600px; }
-.intro-sig { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--teal); margin-top: 26px; }
-
-@media (max-width: 800px) {
-  .intro { padding: 52px 32px; }
-  .intro-grid { grid-template-columns: 1fr; gap: 32px; }
-  .intro-text h2 { font-size: 28px; }
-  .intro-text p { font-size: 16px; }
-}
-@media (max-width: 768px) {
-  .intro-photo { display: none; }
-}
-@media (max-width: 600px) {
-  .intro { padding: 40px 24px; }
-}
-
-/* PILLARS */
-.pillars { background: var(--paper); padding: 104px 70px 96px; }
-.pillars-inner { max-width: 1180px; margin: 0 auto; }
-.pillars-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 54px; padding-bottom: 30px; border-bottom: 1px solid rgba(11,46,43,0.12); gap: 40px; }
-.pillars-header-text .overline { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-.pillars-header-text .overline .rule { width: 30px; height: 2px; background: var(--turq); flex-shrink: 0; }
-.pillars-header-text .overline span { font-family: var(--sans); font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
-.pillars-header-text h2 { font-family: var(--serif); font-weight: 700; font-size: 40px; line-height: 1.12; color: var(--ink); }
-.pillars-header-sub { font-family: var(--sans); font-size: 15px; line-height: 1.7; color: var(--muted); max-width: 300px; margin-bottom: 6px; flex-shrink: 0; }
-.pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px 44px; }
-.pillar-img { aspect-ratio: 4/5; margin-bottom: 22px; overflow: hidden; }
-.pillar-img img { width: 100%; height: 100%; object-fit: cover; }
-.pillar-label { display: flex; align-items: baseline; gap: 12px; margin-bottom: 9px; }
-.pillar-num { font-family: var(--serif); font-size: 14px; color: var(--teal); }
-.pillar-dash { width: 18px; height: 1px; background: var(--faint); display: block; transform: translateY(-4px); flex-shrink: 0; }
-.pillar-name { font-family: var(--sans); font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); font-weight: 700; }
-.pillar-desc { font-family: var(--sans); font-size: 14.5px; line-height: 1.6; color: var(--muted); }
-
-@media (max-width: 1024px) {
-  .pillars { padding: 64px 40px 72px; }
-  .pillars-header-text h2 { font-size: 32px; }
-}
-@media (max-width: 900px) {
-  .pillars { padding: 64px 32px; }
-  .pillars-grid { grid-template-columns: repeat(2, 1fr); gap: 36px 28px; }
-  .pillars-header { flex-direction: column; align-items: flex-start; }
-  .pillars-header-sub { max-width: 100%; }
-}
-@media (max-width: 600px) {
-  .pillars { padding: 44px 24px 48px; }
-  .pillars-header-text h2 { font-size: 25px; }
-  .pillars-grid { gap: 22px 18px; }
-  .pillar-label { gap: 8px; }
-  .pillar-num { font-size: 12px; }
-  .pillar-name { font-size: 11px; letter-spacing: 0.16em; }
-  .pillar-dash { display: none; }
-  .pillar-desc { display: none; }
-}
-
-/* WRITING */
-.writing { background: var(--greige); padding: 100px 70px; }
-.writing-inner { max-width: 1180px; margin: 0 auto; }
-.writing-overline { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-.writing-overline .rule { width: 30px; height: 2px; background: var(--turq); flex-shrink: 0; }
-.writing-overline span { font-family: var(--sans); font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
-.writing-header-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
-.writing-header-row h2 { font-family: var(--serif); font-weight: 700; font-size: 40px; line-height: 1.12; color: var(--ink); }
-.view-all { font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); border-bottom: 1px solid rgba(19,122,111,0.35); padding-bottom: 4px; white-space: nowrap; flex-shrink: 0; }
-.view-all:hover { border-color: var(--teal); }
-.writing-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: start; }
-.featured-img { aspect-ratio: 3/2; margin-bottom: 26px; overflow: hidden; }
-.featured-img img { width: 100%; height: 100%; object-fit: cover; }
-.post-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
-.post-cat { font-family: var(--sans); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
-.post-dot { width: 4px; height: 4px; background: var(--faint); border-radius: 50%; display: block; }
-.post-date { font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #9a9384; }
-.featured-title { font-family: var(--serif); font-weight: 700; font-size: 28px; line-height: 1.24; color: var(--ink); }
-.featured-excerpt { font-family: var(--sans); font-size: 16px; line-height: 1.68; color: var(--warm); margin-top: 16px; max-width: 480px; }
-.post-list { display: flex; flex-direction: column; }
-.post-item { display: block; padding: 24px 0; border-bottom: 1px solid rgba(11,46,43,0.14); }
-.post-item:first-child { padding-top: 0; }
-.post-item:last-child { border-bottom: none; padding-bottom: 0; }
-.post-item .post-meta { margin-bottom: 10px; }
-.post-item .post-cat, .post-item .post-date { font-size: 10.5px; }
-.post-item h4 { font-family: var(--serif); font-weight: 700; font-size: 20px; line-height: 1.3; color: var(--ink); }
-.post-item:hover h4 { color: var(--teal); }
-
+.intro-text .overline { margin-bottom: 22px; }
+.intro-text h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.14; color: var(--ink); }
+.intro-text p { font-family: var(--sans); font-size: 17.5px; line-height: 1.76; color: #4f483d; margin-top: 22px; max-width: 620px; }
+.intro-sig { font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--teal); margin-top: 24px; display: flex; align-items: center; gap: 14px; }
+.intro-sig::before { content: ""; width: 34px; height: 2px; background: var(--turq); display: block; }
 @media (max-width: 860px) {
-  .writing { padding: 64px 32px; }
-  .writing-grid { grid-template-columns: 1fr; gap: 48px; }
-  .writing-header-row h2 { font-size: 30px; }
+  .intro { padding: 56px 24px; }
+  .intro-grid { grid-template-columns: 1fr; gap: 30px; }
+  .intro-photo { max-width: 340px; aspect-ratio: 1/1; }
 }
-@media (max-width: 600px) {
-  .writing { padding: 44px 24px; }
-  .writing-header-row { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .writing-header-row h2 { font-size: 25px; }
+
+/* FREE GUIDE (dark) */
+.guide { background: var(--ink); padding: 100px 70px; color: var(--paper); }
+.guide-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 64px; align-items: center; }
+.guide .overline span { color: var(--turq); }
+.guide-cover { aspect-ratio: 3/4; border-radius: 6px; overflow: hidden; position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; background: linear-gradient(150deg, #14514a, #0B2E2B 70%); border: 1px solid rgba(82,212,200,0.22); }
+.guide-cover .gc-label { font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--turq); font-weight: 700; margin-bottom: 12px; }
+.guide-cover .gc-title { font-family: var(--serif); font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; color: var(--paper); }
+.guide-cover .gc-mark { position: absolute; top: 26px; right: 26px; width: 16px; height: 16px; border: 1.5px solid var(--turq); transform: rotate(45deg); }
+.guide-copy .overline { margin-bottom: 22px; }
+.guide-copy h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3vw, 38px); line-height: 1.18; color: var(--paper); }
+.guide-copy p { font-family: var(--sans); font-size: 16.5px; line-height: 1.7; color: #cfe0db; margin-top: 18px; max-width: 460px; }
+.guide-form { margin-top: 26px; max-width: 440px; }
+.guide-form input { display: block; width: 100%; border: 1px solid rgba(246,244,239,0.22); border-radius: 6px; padding: 15px 17px; font-family: var(--sans); font-size: 14.5px; color: var(--paper); background: rgba(246,244,239,0.06); margin-bottom: 12px; outline: none; transition: border-color 0.2s; }
+.guide-form input::placeholder { color: #9fc4bf; }
+.guide-form input:focus { border-color: var(--turq); }
+.guide-form input.error { border-color: #e8765c; }
+.guide-submit { display: block; width: 100%; text-align: center; background: var(--turq); color: var(--ink); font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; padding: 16px; border-radius: 6px; border: none; cursor: pointer; transition: background 0.2s; }
+.guide-submit:hover { background: #6fe0d5; }
+.guide-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.guide-note { font-family: var(--sans); font-size: 13px; color: #9fc4bf; margin-top: 14px; }
+.guide-disclaimer { font-family: var(--sans); font-style: italic; font-size: 12.5px; color: #7f9893; margin-top: 12px; line-height: 1.5; }
+.guide-success { display: none; background: rgba(82,212,200,0.12); border: 1px solid rgba(82,212,200,0.4); border-radius: 6px; padding: 18px; font-size: 14.5px; color: var(--paper); margin-top: 4px; line-height: 1.5; }
+@media (max-width: 860px) {
+  .guide { padding: 60px 24px; }
+  .guide-grid { grid-template-columns: 1fr; gap: 36px; }
+  .guide-cover { max-width: 300px; margin: 0 auto; }
 }
 
 /* FAITH */
-.faith { background: var(--ink); padding: 118px 70px; text-align: center; }
-.faith-inner { max-width: 860px; margin: 0 auto; }
-.faith-label { font-family: var(--sans); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--turq); font-weight: 700; }
+.faith { background: var(--paper); padding: 116px 70px; text-align: center; }
+.faith-inner { max-width: 880px; margin: 0 auto; }
+.faith-label { font-family: var(--sans); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
 .faith-rule { width: 44px; height: 2px; background: var(--turq); margin: 22px auto 36px; }
-.faith blockquote { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 36px; line-height: 1.42; color: var(--paper); }
-.faith cite { font-family: var(--sans); font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; color: #9fc4bf; font-weight: 700; font-style: normal; display: block; margin-top: 34px; }
+.faith blockquote { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(24px, 3.4vw, 38px); line-height: 1.42; color: var(--ink); }
+.faith cite { font-family: var(--sans); font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); font-weight: 700; font-style: normal; display: block; margin-top: 32px; }
+@media (max-width: 768px) { .faith { padding: 64px 24px; } }
 
-@media (max-width: 768px) {
-  .faith { padding: 52px 28px; }
-  .faith blockquote { font-size: 23px; line-height: 1.44; }
-  .faith-rule { margin: 18px auto 24px; }
-  .faith cite { margin-top: 22px; font-size: 10.5px; }
-}
-
-/* NEWSLETTER */
-.newsletter { background: var(--greige); padding: 108px 70px; }
-.newsletter-grid { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.newsletter-copy .nl-overline { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
-.newsletter-copy .nl-overline .rule { width: 30px; height: 2px; background: var(--turq); flex-shrink: 0; }
-.newsletter-copy .nl-overline span { font-family: var(--sans); font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
-.newsletter-copy h2 { font-family: var(--serif); font-weight: 700; font-size: 38px; line-height: 1.16; color: var(--ink); }
-.newsletter-copy p { font-family: var(--sans); font-size: 17px; line-height: 1.68; color: var(--warm); margin-top: 22px; }
-.nl-form input { display: block; width: 100%; border: 1px solid #cdc7ba; border-radius: 6px; padding: 15px 17px; font-family: var(--sans); font-size: 14.5px; color: var(--ink); background: #fff; margin-bottom: 14px; outline: none; transition: border-color 0.2s; }
-.nl-form input::placeholder { color: #9a9384; }
-.nl-form input:focus { border-color: var(--teal); }
-.nl-form input.error { border-color: #c0392b; }
-.nl-submit { display: block; width: 100%; text-align: center; background: var(--teal); color: var(--paper); font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; padding: 16px; border-radius: 6px; border: none; cursor: pointer; transition: background 0.2s; margin-bottom: 0; }
-.nl-submit:hover { background: #0f6560; }
-.nl-submit:disabled { opacity: 0.6; cursor: not-allowed; }
-.nl-note { font-family: var(--sans); font-size: 12.5px; color: #8a8275; text-align: center; margin-top: 13px; }
-.nl-success { display: none; background: #e8f7f5; border: 1px solid var(--teal); border-radius: 6px; padding: 18px; font-size: 14px; color: var(--ink); line-height: 1.5; }
-
-@media (max-width: 800px) {
-  .newsletter { padding: 64px 32px; }
-  .newsletter-grid { grid-template-columns: 1fr; gap: 40px; }
-  .newsletter-copy h2 { font-size: 30px; }
-}
-@media (max-width: 600px) {
-  .newsletter { padding: 44px 24px; }
-  .newsletter-copy h2 { font-size: 25px; }
-  .nl-form input { padding: 13px 15px; font-size: 13.5px; margin-bottom: 12px; }
-  .nl-submit { font-size: 12px; padding: 15px; }
-}
+/* VIDEO */
+.video { background: var(--greige); padding: 96px 70px; }
+.video-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+.video .overline { justify-content: center; margin-bottom: 20px; }
+.video h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3vw, 40px); line-height: 1.14; color: var(--ink); margin-bottom: 12px; }
+.video p { font-family: var(--sans); font-size: 16px; line-height: 1.7; color: var(--muted); max-width: 480px; margin: 0 auto 40px; }
+.video-frame { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: var(--ink); box-shadow: 0 20px 60px rgba(11,46,43,0.18); }
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-link { display: inline-block; margin-top: 26px; font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); border-bottom: 1px solid rgba(19,122,111,0.35); padding-bottom: 4px; }
+.video-link:hover { border-color: var(--teal); }
+@media (max-width: 768px) { .video { padding: 60px 24px; } }
 
 /* FOOTER */
 .footer { background: var(--footer); padding: 64px 70px 48px; }
-.footer-inner { max-width: 1180px; margin: 0 auto; }
-.footer-top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 38px; border-bottom: 1px solid rgba(82,212,200,0.22); gap: 40px; }
+.footer-inner { max-width: 1120px; margin: 0 auto; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 38px; border-bottom: 1px solid rgba(82,212,200,0.22); gap: 40px; flex-wrap: wrap; }
 .footer-brand-name { font-family: var(--serif); font-weight: 700; font-size: 20px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper); }
 .footer-brand-sub { font-family: var(--sans); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--turq); font-weight: 700; margin-top: 11px; }
-.footer-links { display: flex; gap: 40px; flex-wrap: wrap; align-items: center; }
+.footer-links { display: flex; gap: 36px; flex-wrap: wrap; }
 .footer-links a { font-family: var(--sans); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #cfe0db; }
 .footer-links a:hover { color: var(--turq); }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; gap: 24px; flex-wrap: wrap; }
 .footer-copy { font-family: var(--sans); font-size: 12px; letter-spacing: 0.06em; color: #7f9893; }
-.footer-social { display: flex; gap: 26px; }
+.footer-social { display: flex; gap: 24px; }
 .footer-social a { font-family: var(--sans); font-size: 12px; letter-spacing: 0.1em; color: #9fb8b3; }
 .footer-social a:hover { color: var(--turq); }
-
 @media (max-width: 768px) {
-  .footer { padding: 40px 24px 30px; text-align: center; }
-  .footer-top { flex-direction: column; align-items: center; gap: 22px; }
-  .footer-links { justify-content: center; gap: 22px; }
-  .footer-bottom { flex-direction: column; align-items: center; gap: 20px; padding-top: 20px; }
-  .footer-brand-name { font-size: 16px; letter-spacing: 0.18em; }
-  .footer-brand-sub { font-size: 9.5px; letter-spacing: 0.24em; margin-top: 9px; }
+  .footer { padding: 48px 24px 36px; }
+  .footer-top { flex-direction: column; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
 </style>
 <link rel="stylesheet" href="editor/theme.css">
@@ -271,188 +168,97 @@ img { display: block; max-width: 100%; }
   <div class="nav-logo">Dejah White</div>
   <ul class="nav-links">
     <li class="active"><a href="index.html">Home</a></li>
-    <li class="nav-alt"><a href="home2.html">Home ◆</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="blog.html">Blog</a></li>
+    <li><a href="#welcome">About</a></li>
     <li><a href="travel.html">Travel</a></li>
-    <li class="soon">Shop <span class="soon-badge">Soon</span></li>
+    <li class="soon">Shop (Soon)</li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-mobile-menu" id="mobile-menu">
   <a href="index.html">Home</a>
-  <a href="home2.html" class="mobile-alt">Home ◆</a>
-  <a href="about.html">About</a>
-  <a href="blog.html">Blog</a>
+  <a href="#welcome">About</a>
   <a href="travel.html">Travel</a>
+  <a href="blog.html">Blog</a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-tagline">
-      <span class="rule"></span>
-      <span>Wife &middot; Mother &middot; Writer &middot; Entrepreneur</span>
-      <span class="rule"></span>
-    </div>
-    <h1>sharing the journey<br>of <em>becoming.</em></h1>
-    <p class="hero-sub">A faith-rooted space for women and families building intentional lives &mdash; strong marriages, meaningful work, and a legacy that lasts.</p>
-    <div class="hero-ctas">
-      <a href="about.html" class="btn-primary">Read My Story <span class="arrow">&rarr;</span></a>
-      <a href="#newsletter" class="btn-text">Join the Letter</a>
-    </div>
+  <div class="hero-tagline">
+    <span class="rule"></span>
+    <span>Faith &middot; Family &middot; Lifestyle &middot; Legacy</span>
+    <span class="rule"></span>
+  </div>
+  <h1>sharing the journey<br>of <em>becoming.</em></h1>
+  <p class="hero-sub">I&rsquo;m Dejah &mdash; a woman of faith, a wife, mother, and homemaker, building a travel business and an intentional life with my family.</p>
+  <div class="hero-ctas">
+    <a href="#free-guide" class="btn-primary">Get the Free Travel Guide <span class="arrow">&rarr;</span></a>
+    <a href="#welcome" class="btn-text">More About Me</a>
   </div>
   <div class="hero-banner">
-    <img src="https://static.wixstatic.com/media/037c75_9aba4b5e5c7449c3a6f4c7e7fb03f95d~mv2.jpg" alt="Dejah White — Bimini Beach Club">
+    <img src="https://static.wixstatic.com/media/037c75_9aba4b5e5c7449c3a6f4c7e7fb03f95d~mv2.jpg" alt="Beach club aerial view">
   </div>
 </section>
 
-<!-- INTRO -->
-<section class="intro">
-  <div class="intro-inner">
-    <div class="intro-grid">
-      <div class="intro-photo">
-        <img src="https://static.wixstatic.com/media/037c75_d6903efc168e4e4087d703ca26b38828~mv2.jpg" alt="Dejah White">
-      </div>
-      <div class="intro-text">
-        <div class="overline">
-          <span class="rule"></span>
-          <span>Hello &amp; Welcome</span>
-        </div>
-        <h2>Hi, I&rsquo;m Dejah.</h2>
-        <p>I&rsquo;m a wife and mother building a faith-first life with intention &mdash; and I write for women and families who want the same: strong marriages, meaningful work, natural rhythms at home, and a legacy that outlasts us. Consider this your invitation to grow alongside us.</p>
-        <p class="intro-sig">&mdash; Dejah</p>
-      </div>
+<!-- ABOUT / WELCOME -->
+<section class="intro" id="welcome">
+  <div class="intro-grid">
+    <div class="intro-photo">
+      <img src="https://static.wixstatic.com/media/037c75_19dad4ba1d6c48fa81472abe35875070~mv2.jpg" alt="Dejah White">
+    </div>
+    <div class="intro-text">
+      <div class="overline"><span class="rule"></span><span>Hello &amp; Welcome</span></div>
+      <h2>Hi, I&rsquo;m Dejah.</h2>
+      <p>I&rsquo;m a wife, a mother, and a homemaker, building a faith-first life with intention. Faith and family come first here &mdash; the quiet, everyday work of tending a marriage, raising children, and making a home that feels like peace.</p>
+      <p>Alongside that, my husband and I are building a travel business &mdash; a way for our family to create freedom, flexibility, and a legacy worth passing down. This is where I share that journey, and invite you along.</p>
+      <p class="intro-sig">Dejah</p>
     </div>
   </div>
 </section>
 
-<!-- PILLARS -->
-<section class="pillars">
-  <div class="pillars-inner">
-    <div class="pillars-header">
-      <div class="pillars-header-text">
-        <div class="overline">
-          <span class="rule"></span>
-          <span>The Pillars</span>
-        </div>
-        <h2>Six threads of an<br>intentional life.</h2>
-      </div>
-      <p class="pillars-header-sub">The places we spend our days &mdash; written from the inside, lived before it&rsquo;s shared.</p>
+<!-- FREE GUIDE -->
+<section class="guide" id="free-guide">
+  <div class="guide-grid">
+    <div class="guide-cover">
+      <div class="gc-mark"></div>
+      <div class="gc-label">Free Guide</div>
+      <div class="gc-title">The Smart Traveler&rsquo;s Guide to Turning Trips Into Income</div>
     </div>
-    <div class="pillars-grid">
-      <div class="pillar">
-        <div class="pillar-img"><img src="https://static.wixstatic.com/media/037c75_e26015fe518648a896ee503037757e7a~mv2.png" alt="Faith"></div>
-        <div class="pillar-label"><span class="pillar-num">01</span><span class="pillar-dash"></span><span class="pillar-name">Faith</span></div>
-        <p class="pillar-desc">Rooted prayer, scripture, and the slow trust of walking it out.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-img"><img src="https://static.wixstatic.com/media/037c75_e8cbe4788cfc47b89624ab3716c673c1~mv2.png" alt="Marriage and Motherhood"></div>
-        <div class="pillar-label"><span class="pillar-num">02</span><span class="pillar-dash"></span><span class="pillar-name">Marriage &amp; Motherhood</span></div>
-        <p class="pillar-desc">Tending a covenant and raising children with presence.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-img"><img src="https://static.wixstatic.com/media/037c75_34dd8b719009431f8230ef70d7430429~mv2.png" alt="Home and Intentional Living"></div>
-        <div class="pillar-label"><span class="pillar-num">03</span><span class="pillar-dash"></span><span class="pillar-name">Home &amp; Intentional Living</span></div>
-        <p class="pillar-desc">Calm rhythms, simple spaces, a home that breathes.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-img"><img src="https://static.wixstatic.com/media/037c75_976994c3defd4a1d9331ae4ebe3f872b~mv2.jpg" alt="Natural Beauty"></div>
-        <div class="pillar-label"><span class="pillar-num">04</span><span class="pillar-dash"></span><span class="pillar-name">Natural Beauty</span></div>
-        <p class="pillar-desc">Clean, gentle care for body and home, made simple.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-img"><img src="https://static.wixstatic.com/media/037c75_391d295085e04254a221bd905f782687~mv2.png" alt="Entrepreneurship"></div>
-        <div class="pillar-label"><span class="pillar-num">05</span><span class="pillar-dash"></span><span class="pillar-name">Entrepreneurship</span></div>
-        <p class="pillar-desc">Purposeful work and building something that lasts.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-img"><img src="https://static.wixstatic.com/media/037c75_5748809d38124331b381c8010a34fc43~mv2.png" alt="Travel and Experiences"></div>
-        <div class="pillar-label"><span class="pillar-num">06</span><span class="pillar-dash"></span><span class="pillar-name">Travel &amp; Experiences</span></div>
-        <p class="pillar-desc">Seeing the world together and gathering the memories.</p>
-      </div>
+    <div class="guide-copy">
+      <div class="overline"><span class="rule"></span><span>Start Here</span></div>
+      <h2>You&rsquo;re already paying into travel. It&rsquo;s time you earned from it.</h2>
+      <p>A simple, honest look at how everyday families can build an extra income stream inside the travel industry &mdash; no hype, no pressure. Just the real picture, straight to your inbox.</p>
+      <form class="guide-form" id="guide-form" novalidate>
+        <input type="text" id="g-name" name="firstName" placeholder="First name" required autocomplete="given-name">
+        <input type="email" id="g-email" name="email" placeholder="Email address" required autocomplete="email">
+        <button type="submit" class="guide-submit" id="g-submit">Send Me the Free Guide</button>
+      </form>
+      <div class="guide-success" id="guide-success"><strong>You&rsquo;re in!</strong> The guide is on its way to your inbox &mdash; check spam if you don&rsquo;t see it shortly.</div>
+      <p class="guide-note">The honest, no-hype version. Yours to keep.</p>
+      <p class="guide-disclaimer">This is a real business, not a get-rich-quick scheme. It takes work; it isn&rsquo;t passive, and results vary from person to person.</p>
     </div>
   </div>
 </section>
 
-<!-- FEATURED WRITING -->
-<section class="writing">
-  <div class="writing-inner">
-    <div class="writing-overline">
-      <span class="rule"></span>
-      <span>From the Journal</span>
-    </div>
-    <div class="writing-header-row">
-      <h2>Recent writing.</h2>
-      <a href="blog.html" class="view-all">View All Posts &rarr;</a>
-    </div>
-    <div class="writing-grid">
-      <div>
-        <div class="featured-img">
-          <img id="blog-feat-img" src="https://static.wixstatic.com/media/037c75_12b24b26580d418da9b8b984f6a1c362~mv2.png" alt="Featured article">
-        </div>
-        <div class="post-meta">
-          <span class="post-cat" id="blog-feat-cat">Faith</span>
-          <span class="post-dot"></span>
-          <span class="post-date" id="blog-feat-date">June 2026</span>
-        </div>
-        <a id="blog-feat-link" href="#" style="display:block;">
-          <h3 class="featured-title" id="blog-feat-title">The Quiet Discipline of Becoming</h3>
-        </a>
-        <p class="featured-excerpt" id="blog-feat-excerpt">On the unglamorous, daily work of growth &mdash; and why the smallest faithful habits shape the deepest change.</p>
-      </div>
-      <div class="post-list">
-        <a href="#" class="post-item" data-blog-item="0">
-          <div class="post-meta"><span class="post-cat">Home &amp; Living</span><span class="post-dot"></span><span class="post-date">May 2026</span></div>
-          <h4>On Building a Home That Breathes</h4>
-        </a>
-        <a href="#" class="post-item" data-blog-item="1">
-          <div class="post-meta"><span class="post-cat">Marriage</span><span class="post-dot"></span><span class="post-date">May 2026</span></div>
-          <h4>Marriage as a Daily Liturgy</h4>
-        </a>
-        <a href="#" class="post-item" data-blog-item="2">
-          <div class="post-meta"><span class="post-cat">Natural Living</span><span class="post-dot"></span><span class="post-date">April 2026</span></div>
-          <h4>What Natural Living Taught Me About Trust</h4>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAITH MOMENT -->
+<!-- FAITH -->
 <section class="faith">
   <div class="faith-inner">
     <div class="faith-label">A Moment of Faith</div>
     <div class="faith-rule"></div>
-    <blockquote>&ldquo;She is clothed with strength and dignity; she can laugh at the days to come.&rdquo;</blockquote>
+    <blockquote>&ldquo;Strength and honor are her clothing; and she shall rejoice in time to come.&rdquo;</blockquote>
     <cite>Proverbs 31:25</cite>
   </div>
 </section>
 
-<!-- NEWSLETTER -->
-<section class="newsletter" id="newsletter">
-  <div class="newsletter-grid">
-    <div class="newsletter-copy">
-      <div class="nl-overline">
-        <span class="rule"></span>
-        <span>Join the Letter</span>
-      </div>
-      <h2>Come along for<br>the journey.</h2>
-      <p>A quiet note now and then &mdash; reflections, new writing, and the small things shaping an intentional life. No noise, ever.</p>
+<!-- VIDEO -->
+<section class="video">
+  <div class="video-inner">
+    <div class="overline"><span class="rule"></span><span>Lifestyle &amp; Legacy</span></div>
+    <h2>Come walk with us.</h2>
+    <p>New videos on faith, family, homemaking, and building our travel business &mdash; straight from my channel.</p>
+    <div class="video-frame">
+      <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UU9bxMyddcirhn0GxFVlqNbA" title="Dejah White on YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
-    <div>
-      <form class="nl-form" id="nl-form" novalidate>
-        <input type="text" id="nl-name" name="firstName" placeholder="First name" required autocomplete="given-name">
-        <input type="email" id="nl-email" name="email" placeholder="Email address" required autocomplete="email">
-        <button type="submit" class="nl-submit" id="nl-submit">Join the Journey</button>
-      </form>
-      <div class="nl-success" id="nl-success">
-        <strong>Welcome!</strong> A warm note is on its way to your inbox.
-      </div>
-      <p class="nl-note">A warm welcome note, and nothing you didn&rsquo;t ask for.</p>
-    </div>
+    <a class="video-link" href="https://www.youtube.com/@thedejahwhite" target="_blank" rel="noopener">Visit the Channel &rarr;</a>
   </div>
 </section>
 
@@ -462,14 +268,16 @@ img { display: block; max-width: 100%; }
     <div class="footer-top">
       <div>
         <div class="footer-brand-name">Dejah White</div>
-        <div class="footer-brand-sub">Sharing the Journey of Becoming</div>
+        <div class="footer-brand-sub">Faith &middot; Family &middot; Lifestyle &middot; Legacy</div>
       </div>
       <nav class="footer-links">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="blog.html">Blog</a>
+        <a href="#welcome">About</a>
         <a href="travel.html">Travel</a>
-        <a href="contact.html">Contact</a>
+        <a href="blog.html">Blog</a>
+        <a href="https://www.dejahwhite.com/podcast" target="_blank" rel="noopener">Podcast</a>
+        <a href="https://www.dejahwhite.com/meetings" target="_blank" rel="noopener">Book</a>
+        <a href="https://www.dejahwhite.com/forum" target="_blank" rel="noopener">Forum</a>
       </nav>
     </div>
     <div class="footer-bottom">
@@ -478,7 +286,7 @@ img { display: block; max-width: 100%; }
         <a href="https://www.instagram.com/dejahwhitetravel" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.facebook.com/dejahwhitetravel" target="_blank" rel="noopener">Facebook</a>
         <a href="https://www.tiktok.com/@thedejahwhite" target="_blank" rel="noopener">TikTok</a>
-        <a href="https://www.youtube.com/dejahshardae" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.youtube.com/@thedejahwhite" target="_blank" rel="noopener">YouTube</a>
       </div>
     </div>
   </div>
@@ -489,10 +297,9 @@ img { display: block; max-width: 100%; }
     document.getElementById('mobile-menu').classList.toggle('open');
   });
 
+  // ── Wix CRM: free-guide lead form ──
   var WIX_CLIENT_ID = '897cba15-c5fb-4204-a89b-81bbca8b6f4e';
-  var WIX_SITE_ID   = 'ee0295b0-5a24-47cd-8610-58c1b5e46882';
   var _wixToken = null, _wixTokenExp = 0;
-
   function getVisitorToken() {
     if (_wixToken && Date.now() < _wixTokenExp) return Promise.resolve(_wixToken);
     return fetch('https://www.wixapis.com/oauth2/token', {
@@ -508,133 +315,39 @@ img { display: block; max-width: 100%; }
       return _wixToken;
     });
   }
-
-  function wixRequest(url, options) {
-    options = options || {};
-    return getVisitorToken().then(function(token) {
-      var headers = Object.assign({
-        'Authorization': 'Bearer ' + token
-      }, options.headers || {});
-      return fetch(url, Object.assign({}, options, { headers: headers }));
-    }).then(function(res) {
-      return res.json().then(function(data) {
-        if (!res.ok && res.status !== 409) throw new Error(data.message || String(res.status));
-        return data;
-      });
-    });
-  }
-
-  var nlForm    = document.getElementById('nl-form');
-  var nlSubmit  = document.getElementById('nl-submit');
-  var nlSuccess = document.getElementById('nl-success');
-  var nlName    = document.getElementById('nl-name');
-  var nlEmail   = document.getElementById('nl-email');
-
   function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 
-  nlForm.addEventListener('submit', function(e) {
+  var gForm = document.getElementById('guide-form');
+  var gSubmit = document.getElementById('g-submit');
+  var gName = document.getElementById('g-name');
+  var gEmail = document.getElementById('g-email');
+  var gSuccess = document.getElementById('guide-success');
+
+  gForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    var firstName = nlName.value.trim();
-    var email = nlEmail.value.trim();
-    nlName.classList.remove('error');
-    nlEmail.classList.remove('error');
+    var firstName = gName.value.trim();
+    var email = gEmail.value.trim();
+    gName.classList.remove('error'); gEmail.classList.remove('error');
     var valid = true;
-    if (!firstName) { nlName.classList.add('error'); valid = false; }
-    if (!email || !isValidEmail(email)) { nlEmail.classList.add('error'); valid = false; }
+    if (!firstName) { gName.classList.add('error'); valid = false; }
+    if (!email || !isValidEmail(email)) { gEmail.classList.add('error'); valid = false; }
     if (!valid) return;
-    nlSubmit.disabled = true;
-    nlSubmit.textContent = 'Joining…';
-    wixRequest('https://www.wixapis.com/contacts/v4/contacts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        info: {
-          name: { first: firstName },
-          emails: { items: [{ tag: 'MAIN', email: email }] }
-        }
-      })
-    }).then(function() {
-      nlForm.style.display = 'none';
-      nlSuccess.style.display = 'block';
+    gSubmit.disabled = true; gSubmit.textContent = 'Sending…';
+    getVisitorToken().then(function(token) {
+      return fetch('https://www.wixapis.com/contacts/v4/contacts', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ info: { name: { first: firstName }, emails: { items: [{ tag: 'MAIN', email: email }] } } })
+      });
+    }).then(function(res) {
+      if (!res.ok && res.status !== 409) throw new Error('Server error ' + res.status);
+      gForm.style.display = 'none';
+      gSuccess.style.display = 'block';
     }).catch(function() {
-      nlSubmit.disabled = false;
-      nlSubmit.textContent = 'Join the Journey';
+      gSubmit.disabled = false; gSubmit.textContent = 'Send Me the Free Guide';
+      gName.classList.add('error'); gEmail.classList.add('error');
     });
   });
-
-  function fmtDate(iso) {
-    if (!iso) return '';
-    return new Date(iso).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-  }
-
-  var CATEGORY_MAP = {};
-  function catOf(post) {
-    if (post.categoryIds && post.categoryIds.length && CATEGORY_MAP[post.categoryIds[0]]) {
-      return CATEGORY_MAP[post.categoryIds[0]];
-    }
-    if (post.hashtags && post.hashtags.length) return post.hashtags[0];
-    return 'Journal';
-  }
-
-  function loadCategories() {
-    return wixRequest('https://www.wixapis.com/blog/v3/categories/query', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ paging: { limit: 50 } })
-    })
-    .then(function(data) {
-      (data.categories || []).forEach(function(c) { CATEGORY_MAP[c.id] = c.label || c.title || ''; });
-    })
-    .catch(function() {});
-  }
-
-  function loadBlogPosts() {
-    wixRequest('https://www.wixapis.com/blog/v3/posts/query', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ paging: { limit: 4, offset: 0 } })
-    })
-    .then(function(data) {
-      var posts = (data.posts || []).slice(0, 4);
-      if (!posts.length) return;
-      var featured = posts[0];
-      var sidebar  = posts.slice(1, 4);
-
-      var imgEl     = document.getElementById('blog-feat-img');
-      var linkEl    = document.getElementById('blog-feat-link');
-      var catEl     = document.getElementById('blog-feat-cat');
-      var dateEl    = document.getElementById('blog-feat-date');
-      var titleEl   = document.getElementById('blog-feat-title');
-      var excerptEl = document.getElementById('blog-feat-excerpt');
-
-      if (imgEl && featured.media && featured.media.wixMedia && featured.media.wixMedia.image) {
-        imgEl.src = featured.media.wixMedia.image.url + '/v1/fill/w_800,h_533,al_c,q_80/file.jpg';
-        imgEl.alt = featured.title;
-      }
-      if (linkEl && featured.slug) linkEl.href = 'blog-post.html?slug=' + featured.slug;
-      if (catEl) catEl.textContent = catOf(featured);
-      if (dateEl) dateEl.textContent = fmtDate(featured.firstPublishedDate);
-      if (titleEl) titleEl.textContent = featured.title;
-      if (excerptEl) excerptEl.textContent = featured.excerpt || '';
-
-      var sideItems = document.querySelectorAll('[data-blog-item]');
-      for (var i = 0; i < sideItems.length; i++) {
-        var idx  = parseInt(sideItems[i].getAttribute('data-blog-item'), 10);
-        var post = sidebar[idx];
-        if (!post) continue;
-        var c = sideItems[i].querySelector('.post-cat');
-        var d = sideItems[i].querySelector('.post-date');
-        var t = sideItems[i].querySelector('h4');
-        if (c) c.textContent = catOf(post);
-        if (d) d.textContent = fmtDate(post.firstPublishedDate);
-        if (t) t.textContent = post.title;
-        if (post.slug) sideItems[i].href = 'blog-post.html?slug=' + post.slug;
-      }
-    })
-    .catch(function() {});
-  }
-
-  loadCategories().then(loadBlogPosts);
 </script>
 
 <script src="editor/editor.js" defer></script>
